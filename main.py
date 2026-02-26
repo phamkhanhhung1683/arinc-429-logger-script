@@ -2,9 +2,6 @@ import socket
 import argparse
 import time
 
-def process_arinc(message_string):
-    print(f"Processing: {message_string}")
-
 
 def decode_arinc_429_word(raw_str):
     if not raw_str or len(raw_str) != 9:
@@ -17,7 +14,6 @@ def decode_arinc_429_word(raw_str):
         channel = ord(first_char) - 64
 
         payload = raw_str[1:]
-
         reversed_payload = payload[::-1]
 
         binary_str = ""
@@ -47,7 +43,6 @@ def decode_arinc_429_word(raw_str):
                 "label": label
             }
         }
-
         print(result)
         return result
     except Exception as e:
@@ -66,7 +61,7 @@ def start_client(host, port):
 
                 while True:
                     data = client_socket.recv(4096)
-                    
+
                     if not data:
                         print("Connection closed")
                         break
@@ -88,6 +83,7 @@ def start_client(host, port):
 
         print("Retrying...")
         time.sleep(1)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TCP client receiving data from an ARINC 429 LAN board")
