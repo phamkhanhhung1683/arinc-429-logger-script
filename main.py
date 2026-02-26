@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def init_db():
-    conn = sqlite3.connect("arinc_429_log.db", check_same_thread=False)
+    conn = sqlite3.connect("arinc_429_log.db")
     conn.execute('PRAGMA journal_mode=WAL;')
     cursor = conn.cursor()
 
@@ -85,6 +85,7 @@ def save_to_db(conn, data):
         fields = data['fields']
 
         now = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+        print(now)
 
         cursor.execute('''
             INSERT INTO arinc_429_messages 
@@ -107,39 +108,42 @@ def save_to_db(conn, data):
 
 def start_client(host, port):
     db_conn = init_db()
+    try:
+        while True:
+            buffer = ""
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+                    print(f"Connecting to the ARINC 429 LAN board at {host}:{port}...")
+                    client_socket.connect((host, port))
+                    print(f"Connected to the ARINC 429 LAN board at {host}:{port}")
 
-    while True:
-        buffer = ""
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-                print(f"Connecting to the ARINC 429 LAN board at {host}:{port}...")
-                client_socket.connect((host, port))
-                print(f"Connected to the ARINC 429 LAN board at {host}:{port}")
+                    while True:
+                        data = client_socket.recv(4096)
 
-                while True:
-                    data = client_socket.recv(4096)
+                        if not data:
+                            print("Connection closed")
+                            break
 
-                    if not data:
-                        print("Connection closed")
-                        break
+                        buffer += data.decode('ascii', errors='ignore')
+                        lines = buffer.split('\n')
+                        buffer = lines.pop()
 
-                    buffer += data.decode('ascii', errors='ignore')
-                    lines = buffer.split('\n')
-                    buffer = lines.pop()
+                        for line in lines:
+                            print(f"Line: {line}")
+                            print(f"Length: {len(line)}")
+                            result = decode_arinc_429_word(line)
+                            if result:
+                                save_to_db(db_conn, result)
+                            print()
 
-                    for line in lines:
-                        print(f"Line: {line}")
-                        print(f"Length: {len(line)}")
-                        result = decode_arinc_429_word(line)
-                        if result:
-                            save_to_db(db_conn, result)
-                        print()
+            except Exception as e:
+                print(f"Network error: {e}")
 
-        except Exception as e:
-            print(f"Network error: {e}")
-
-        print("Retrying...")
-        time.sleep(1)
+            print("Retrying...")
+            time.sleep(1)
+    finally:
+        db_conn.close()
+        print("Database connection closed")
 
 
 if __name__ == "__main__":
