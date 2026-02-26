@@ -8,8 +8,8 @@ from datetime import datetime
 def init_db():
     conn = sqlite3.connect("arinc_429_log.db")
     conn.execute('PRAGMA journal_mode=WAL;')
-    cursor = conn.cursor()
 
+    cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS arinc_429_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -68,7 +68,6 @@ def decode_arinc_429_word(raw_str):
             }
         }
         print(result)
-
         return result
 
     except Exception as e:
@@ -102,6 +101,7 @@ def save_to_db(conn, data):
             data['binary']
         ))
         conn.commit()
+
     except Exception as e:
         print(f"Database insertion error: {e}")
 
@@ -163,5 +163,4 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
     start_client(args.host, args.port)
