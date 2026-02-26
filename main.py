@@ -1,38 +1,42 @@
 import socket
 import argparse
+import time
 
 def process_arinc(message_string):
     print(f"Processing: {message_string}")
 
 def start_client(host, port):
-    buffer = ""
-    
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-            print(f"Connecting to the ARINC 429 LAN board at {host}:{port}...")
-            client_socket.connect((host, port))
-            print(f"Connected to the ARINC 429 LAN board at {host}:{port}")
+    while True:
+        buffer = ""
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+                print(f"Connecting to the ARINC 429 LAN board at {host}:{port}...")
+                client_socket.connect((host, port))
+                print(f"Connected to the ARINC 429 LAN board at {host}:{port}")
 
-            while True:
-                data = client_socket.recv(4096)
-                
-                if not data:
-                    print("Connection closed")
-                    break
+                while True:
+                    data = client_socket.recv(4096)
+                    
+                    if not data:
+                        print("Connection closed")
+                        break
 
-                buffer += data.decode('ascii', errors='ignore')
+                    buffer += data.decode('ascii', errors='ignore')
 
-                lines = buffer.split('\n')
+                    lines = buffer.split('\n')
 
-                buffer = lines.pop()
+                    buffer = lines.pop()
 
-                for line in lines:
-                    print(f"Full message: {line}")
-                    print(f"Bytes: {len(line)}")
-                    process_arinc(line)
+                    for line in lines:
+                        print(f"Full message: {line}")
+                        print(f"Bytes: {len(line)}")
+                        process_arinc(line)
 
-    except Exception as e:
-        print(f"Exception: {e}")
+        except Exception as e:
+            print(f"Exception: {e}")
+
+        print("Retrying...")
+        time.sleep(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TCP client receiving data from an ARINC 429 LAN board")

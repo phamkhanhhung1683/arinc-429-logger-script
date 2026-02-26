@@ -1,1 +1,1 @@
-# Script for TCP client receiving data from an ARINC 429 LAN board
+# Script for the TCP client receiving data from an ARINC 429 LAN board
