@@ -11,6 +11,8 @@ options:
   --port PORT  Board port number (default: 10001)
 ```
 
+You can use DB Browser for SQLite to view logs stored in the arinc_429_log.db database file.
+
 ## Example
 
 ```sh
