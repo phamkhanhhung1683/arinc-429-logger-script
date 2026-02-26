@@ -16,5 +16,9 @@ You can use DB Browser for SQLite to view logs stored in the arinc_429_log.db da
 ## Example
 
 ```sh
+python3 main.py
+```
+
+```sh
 python3 main.py --host 192.168.24.190 --port 10001
 ```
