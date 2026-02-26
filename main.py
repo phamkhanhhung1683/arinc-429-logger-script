@@ -1,6 +1,30 @@
 import socket
 import argparse
 import time
+import sqlite3
+from datetime import datetime
+
+
+def init_db():
+    conn = sqlite3.connect("arinc_429_log.db", check_same_thread=False)
+    conn.execute('PRAGMA journal_mode=WAL;')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS arinc_429_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME,
+            label TEXT,
+            sdi TEXT,
+            data TEXT,
+            ssm TEXT,
+            parity TEXT,
+            channel INTEGER,
+            binary TEXT
+        )
+    ''')
+
+    return conn
 
 
 def decode_arinc_429_word(raw_str):
@@ -44,13 +68,46 @@ def decode_arinc_429_word(raw_str):
             }
         }
         print(result)
+
         return result
+
     except Exception as e:
         print(f"Decoding error: {e}")
         return None
 
 
+def save_to_db(conn, data):
+    if not data:
+        return
+
+    try:
+        cursor = conn.cursor()
+        fields = data['fields']
+
+        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+
+        cursor.execute('''
+            INSERT INTO arinc_429_messages 
+            (timestamp, label, sdi, data, ssm, parity, channel, binary)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            now,
+            fields['label'],
+            fields['sdi'],
+            fields['data'],
+            fields['ssm'],
+            fields['parity'],
+            data['channel'],
+            data['binary']
+        ))
+        conn.commit()
+    except Exception as e:
+        print(f"Database insertion error: {e}")
+
+
 def start_client(host, port):
+    db_conn = init_db()
+
     while True:
         buffer = ""
         try:
@@ -67,19 +124,19 @@ def start_client(host, port):
                         break
 
                     buffer += data.decode('ascii', errors='ignore')
-
                     lines = buffer.split('\n')
-
                     buffer = lines.pop()
 
                     for line in lines:
                         print(f"Line: {line}")
                         print(f"Length: {len(line)}")
-                        decode_arinc_429_word(line)
+                        result = decode_arinc_429_word(line)
+                        if result:
+                            save_to_db(db_conn, result)
                         print()
 
         except Exception as e:
-            print(f"Network exception: {e}")
+            print(f"Network error: {e}")
 
         print("Retrying...")
         time.sleep(1)
