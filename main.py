@@ -5,6 +5,56 @@ import time
 def process_arinc(message_string):
     print(f"Processing: {message_string}")
 
+
+def decode_arinc_429_word(raw_str):
+    if not raw_str or len(raw_str) != 9:
+        return None
+
+    try:
+        first_char = raw_str[0]
+        if not first_char.isupper():
+            return None
+        channel = ord(first_char) - 64
+
+        payload = raw_str[1:]
+
+        reversed_payload = payload[::-1]
+
+        binary_str = ""
+        for char in reversed_payload:
+            val = ord(char) - 97
+            if 0 <= val <= 15:
+                binary_str += format(val, '04b')
+            else:
+                return None
+
+        final_bits = binary_str[::-1]
+
+        parity = final_bits[0]
+        ssm    = final_bits[1:3]
+        data   = final_bits[3:22]
+        sdi    = final_bits[22:24]
+        label  = final_bits[24:32]
+
+        result = {
+            "channel": channel,
+            "binary": final_bits,
+            "fields": {
+                "parity": parity,
+                "ssm": ssm,
+                "data": data,
+                "sdi": sdi,
+                "label": label
+            }
+        }
+
+        print(result)
+        return result
+    except Exception as e:
+        print(f"Decoding error: {e}")
+        return None
+
+
 def start_client(host, port):
     while True:
         buffer = ""
@@ -28,12 +78,13 @@ def start_client(host, port):
                     buffer = lines.pop()
 
                     for line in lines:
-                        print(f"Full message: {line}")
-                        print(f"Bytes: {len(line)}")
-                        process_arinc(line)
+                        print(f"Line: {line}")
+                        print(f"Length: {len(line)}")
+                        decode_arinc_429_word(line)
+                        print()
 
         except Exception as e:
-            print(f"Exception: {e}")
+            print(f"Network exception: {e}")
 
         print("Retrying...")
         time.sleep(1)
