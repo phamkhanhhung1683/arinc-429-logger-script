@@ -71,7 +71,7 @@ def decode_arinc_429_word(raw_str):
         return result
 
     except Exception as e:
-        print(f"Decoding error: {e}")
+        print(f"[ERROR] Decoding: {e}")
         return None
 
 
@@ -103,7 +103,7 @@ def save_to_db(conn, data):
         conn.commit()
 
     except Exception as e:
-        print(f"Database insertion error: {e}")
+        print(f"[ERROR] Database insertion: {e}")
 
 
 def start_client(host, port):
@@ -113,15 +113,16 @@ def start_client(host, port):
             buffer = ""
             try:
                 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-                    print(f"Connecting to the ARINC 429 LAN board at {host}:{port}...")
+                    print(f"[INFO] Connecting to the ARINC 429 LAN board at {host}:{port}...")
+                    client_socket.settimeout(5)
                     client_socket.connect((host, port))
-                    print(f"Connected to the ARINC 429 LAN board at {host}:{port}")
+                    print(f"[INFO] Connected to the ARINC 429 LAN board at {host}:{port}")
 
                     while True:
                         data = client_socket.recv(4096)
 
                         if not data:
-                            print("Connection closed")
+                            print("[INFO] Connection closed")
                             break
 
                         buffer += data.decode('ascii', errors='ignore')
@@ -137,13 +138,13 @@ def start_client(host, port):
                             print()
 
             except Exception as e:
-                print(f"Network error: {e}")
+                print(f"[ERROR] Network: {e}")
 
-            print("Retrying...")
+            print("[INFO] Reconnecting...")
             time.sleep(1)
     finally:
         db_conn.close()
-        print("Database connection closed")
+        print("[INFO] Database connection closed")
 
 
 if __name__ == "__main__":
