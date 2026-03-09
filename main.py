@@ -14,13 +14,12 @@ def init_db():
         CREATE TABLE IF NOT EXISTS arinc_429_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME,
-            label TEXT,
-            sdi TEXT,
-            data TEXT,
-            ssm TEXT,
-            parity TEXT,
             channel INTEGER,
-            binary TEXT
+            raw_message TEXT,
+            raw_label TEXT,
+            raw_data TEXT,
+            raw_ssm TEXT,
+            raw_parity TEXT
         )
     ''')
 
@@ -52,8 +51,7 @@ def decode_arinc_429_word(raw_str):
 
         parity = final_bits[0]
         ssm    = final_bits[1:3]
-        data   = final_bits[3:22]
-        sdi    = final_bits[22:24]
+        data   = final_bits[3:24]
         label  = final_bits[24:32]
 
         result = {
@@ -63,7 +61,6 @@ def decode_arinc_429_word(raw_str):
                 "parity": parity,
                 "ssm": ssm,
                 "data": data,
-                "sdi": sdi,
                 "label": label
             }
         }
@@ -75,30 +72,28 @@ def decode_arinc_429_word(raw_str):
         return None
 
 
-def save_to_db(conn, data):
-    if not data:
+def save_raw_message(conn, raw_message):
+    if not raw_message:
         return
 
     try:
         cursor = conn.cursor()
-        fields = data['fields']
 
         now = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
         print(now)
 
         cursor.execute('''
             INSERT INTO arinc_429_messages 
-            (timestamp, label, sdi, data, ssm, parity, channel, binary)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            (timestamp, channel, raw_message, raw_label, raw_data, raw_ssm, raw_parity)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (
             now,
-            fields['label'],
-            fields['sdi'],
-            fields['data'],
-            fields['ssm'],
-            fields['parity'],
-            data['channel'],
-            data['binary']
+            raw_message['channel'],
+            raw_message['binary'],
+            raw_message['fields']['label'],
+            raw_message['fields']['data'],
+            raw_message['fields']['ssm'],
+            raw_message['fields']['parity'],
         ))
         conn.commit()
 
@@ -134,7 +129,7 @@ def start_client(host, port):
                             print(f"Length: {len(line)}")
                             result = decode_arinc_429_word(line)
                             if result:
-                                save_to_db(db_conn, result)
+                                save_raw_message(db_conn, result)
                             print()
 
             except Exception as e:
