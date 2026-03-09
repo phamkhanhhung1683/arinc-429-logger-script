@@ -3,7 +3,7 @@
 ## Usage
 
 ```sh
-python3 main.py [-h] [--host HOST] [--port PORT]
+python3 scripts/main.py [-h] [--host HOST] [--port PORT]
 
 options:
   -h, --help   show this help message and exit
@@ -16,9 +16,9 @@ You can use DB Browser for SQLite to view logs stored in the arinc_429_log.db da
 ## Example
 
 ```sh
-python3 main.py
+python3 scripts/main.py
 ```
 
 ```sh
-python3 main.py --host 192.168.24.190 --port 10001
+python3 scripts/main.py --host 192.168.24.190 --port 10001
 ```
