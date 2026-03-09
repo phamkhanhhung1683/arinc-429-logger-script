@@ -1,9 +1,77 @@
 import argparse
 import socket
+import sqlite3
 import time
 
-from init_db import init_db
-from extract_and_load_raw_message import extract_and_load_raw_message
+from load_message import load_message
+from transform_message import transform_message
+
+
+def init_db():
+    conn = sqlite3.connect("arinc_429_log.db")
+    conn.execute('PRAGMA journal_mode=WAL;')
+
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS arinc_429_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME,
+            channel INTEGER,
+            raw_message TEXT,
+            raw_label_field TEXT,
+            raw_data_field TEXT,
+            raw_ssm_field TEXT,
+            raw_parity_field TEXT
+        )
+    ''')
+
+    return conn
+
+
+def decode_arinc_429_word(raw_str):
+    if not raw_str or len(raw_str) != 9:
+        return None
+
+    try:
+        first_char = raw_str[0]
+        if not first_char.isupper():
+            return None
+        channel = ord(first_char) - 64
+
+        payload = raw_str[1:]
+        reversed_payload = payload[::-1]
+
+        binary_str = ""
+        for char in reversed_payload:
+            val = ord(char) - 97
+            if 0 <= val <= 15:
+                binary_str += format(val, '04b')
+            else:
+                return None
+
+        final_bits = binary_str[::-1]
+
+        parity = final_bits[0]
+        ssm    = final_bits[1:3]
+        data   = final_bits[3:24]
+        label  = final_bits[24:32]
+
+        result = {
+            "channel": channel,
+            "binary": final_bits,
+            "fields": {
+                "parity": parity,
+                "ssm": ssm,
+                "data": data,
+                "label": label
+            }
+        }
+        print(result)
+        return result
+
+    except Exception as e:
+        print(f"[ERROR] Decoding: {e}")
+        return None
 
 
 def start_client(host, port):
@@ -33,7 +101,10 @@ def start_client(host, port):
                             print(f"Line: {line}")
                             print(f"Length: {len(line)}")
 
-                            extract_and_load_raw_message(db_conn, line)
+                            raw_message = decode_arinc_429_word(line)
+                            if raw_message:
+                                processed_message = transform_message(raw_message)
+                                load_message(db_conn, processed_message)
 
                             print()
 
