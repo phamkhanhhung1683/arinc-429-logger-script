@@ -17,7 +17,7 @@ def init_db():
             raw_ssm_field TEXT,
             raw_parity_field TEXT,
             processed_label_field TEXT,
-            label_group TEXT
+            message_group TEXT
         )
     ''')
 

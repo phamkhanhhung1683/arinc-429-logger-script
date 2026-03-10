@@ -12,9 +12,9 @@ def transform_message(raw_message):
 
     a_737_labels = [ "317", "210", "211", "010", "223", "266", "267", "264", "324", "127", "320", "126", "031", "030", "377", "154"]
     if processed_label in a_737_labels:
-        label_group = "A-737"
+        message_group = "A-737"
     else:
-        label_group = None
+        message_group = None
 
     processed_message = {
         "channel": raw_message['channel'],
@@ -28,7 +28,7 @@ def transform_message(raw_message):
         "processed_fields": {
             "label": processed_label
         },
-        "label_group": label_group
+        "message_group": message_group
     }
 
     return processed_message
