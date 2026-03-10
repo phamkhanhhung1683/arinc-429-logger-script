@@ -1,30 +1,10 @@
-import socket
 import argparse
+import socket
 import time
-import sqlite3
-from datetime import datetime
 
-
-def init_db():
-    conn = sqlite3.connect("arinc_429_log.db")
-    conn.execute('PRAGMA journal_mode=WAL;')
-
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS arinc_429_messages (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp DATETIME,
-            label TEXT,
-            sdi TEXT,
-            data TEXT,
-            ssm TEXT,
-            parity TEXT,
-            channel INTEGER,
-            binary TEXT
-        )
-    ''')
-
-    return conn
+from init_db import init_db
+from load_message import load_message
+from transform_message import transform_message
 
 
 def decode_arinc_429_word(raw_str):
@@ -52,8 +32,7 @@ def decode_arinc_429_word(raw_str):
 
         parity = final_bits[0]
         ssm    = final_bits[1:3]
-        data   = final_bits[3:22]
-        sdi    = final_bits[22:24]
+        data   = final_bits[3:24]
         label  = final_bits[24:32]
 
         result = {
@@ -63,7 +42,6 @@ def decode_arinc_429_word(raw_str):
                 "parity": parity,
                 "ssm": ssm,
                 "data": data,
-                "sdi": sdi,
                 "label": label
             }
         }
@@ -73,37 +51,6 @@ def decode_arinc_429_word(raw_str):
     except Exception as e:
         print(f"[ERROR] Decoding: {e}")
         return None
-
-
-def save_to_db(conn, data):
-    if not data:
-        return
-
-    try:
-        cursor = conn.cursor()
-        fields = data['fields']
-
-        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-        print(now)
-
-        cursor.execute('''
-            INSERT INTO arinc_429_messages 
-            (timestamp, label, sdi, data, ssm, parity, channel, binary)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            now,
-            fields['label'],
-            fields['sdi'],
-            fields['data'],
-            fields['ssm'],
-            fields['parity'],
-            data['channel'],
-            data['binary']
-        ))
-        conn.commit()
-
-    except Exception as e:
-        print(f"[ERROR] Database insertion: {e}")
 
 
 def start_client(host, port):
@@ -132,9 +79,12 @@ def start_client(host, port):
                         for line in lines:
                             print(f"Line: {line}")
                             print(f"Length: {len(line)}")
-                            result = decode_arinc_429_word(line)
-                            if result:
-                                save_to_db(db_conn, result)
+
+                            raw_message = decode_arinc_429_word(line)
+                            if raw_message:
+                                processed_message = transform_message(raw_message)
+                                load_message(db_conn, processed_message)
+
                             print()
 
             except Exception as e:
