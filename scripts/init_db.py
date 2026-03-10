@@ -16,7 +16,8 @@ def init_db():
             raw_data_field TEXT,
             raw_ssm_field TEXT,
             raw_parity_field TEXT,
-            processed_label_field TEXT
+            processed_label_field TEXT,
+            label_group TEXT
         )
     ''')
 

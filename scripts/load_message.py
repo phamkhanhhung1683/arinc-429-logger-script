@@ -20,8 +20,9 @@ def load_message(db_conn, message):
             raw_data_field,
             raw_ssm_field,
             raw_parity_field,
-            processed_label_field)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            processed_label_field,
+            label_group)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             now,
             message['channel'],
@@ -30,7 +31,8 @@ def load_message(db_conn, message):
             message['raw_fields']['data'],
             message['raw_fields']['ssm'],
             message['raw_fields']['parity'],
-            message['processed_fields']['label']
+            message['processed_fields']['label'],
+            message['label_group']
         ))
         db_conn.commit()
 
