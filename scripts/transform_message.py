@@ -37,7 +37,7 @@ def transform_message(raw_message):
             raw_val = binary_to_decimal(raw_message['fields']['data'])
             if raw_val is not None:
                 scale = Decimal(90) / (Decimal(2) ** 20)
-                processed_data = (scale * Decimal(raw_val)).quantize(Decimal("1e-30"))
+                processed_data = (scale * Decimal(raw_val)).normalize()
                 processed_data = str(processed_data)
 
 
