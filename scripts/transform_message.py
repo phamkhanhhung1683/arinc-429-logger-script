@@ -38,35 +38,35 @@ def transform_message(raw_message):
             if raw_val is not None:
                 scale = Decimal("90") / (Decimal("2") ** 20)
                 processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = str(processed_data)
+                processed_data = format(processed_data, 'f')
 
         case "223":
             raw_val = binary_to_decimal(raw_message['fields']['data'])
             if raw_val is not None:
                 scale = Decimal("65536") / (Decimal("2") ** 20)
                 processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = str(processed_data)
+                processed_data = format(processed_data, 'f')
 
         case "266" | "267" | "264":
             raw_val = binary_to_decimal(raw_message['fields']['data'])
             if raw_val is not None:
                 scale = Decimal("3034.3168") / (Decimal("2") ** 20)
                 processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = str(processed_data)
+                processed_data = format(processed_data, 'f')
 
         case "127":
             raw_val = binary_to_decimal(raw_message['fields']['data'])
             if raw_val is not None:
                 scale = Decimal("104857.6") / (Decimal("2") ** 20)
                 processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = str(processed_data)
+                processed_data = format(processed_data, 'f')
 
         case "320":
             raw_val = binary_to_decimal(raw_message['fields']['data'][:15])
             if raw_val is not None:
                 scale = Decimal("16384") / (Decimal("2") ** 14)
                 processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = str(processed_data)
+                processed_data = format(processed_data, 'f')
 
     processed_message = {
         "channel": raw_message['channel'],
