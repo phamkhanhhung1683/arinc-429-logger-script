@@ -25,7 +25,7 @@ def transform_message(raw_message):
     except ValueError:
         processed_label = None
 
-    a_737_labels = [ "317", "210", "211", "010", "223", "266", "267", "264", "324", "127", "320", "126", "031", "030", "377", "154"]
+    a_737_labels = [ "317", "210", "211", "010", "223", "266", "267", "264", "324", "127", "320", "126", "031", "030", "377", "153"]
     if processed_label in a_737_labels:
         message_group = "A-737"
     else:
