@@ -31,8 +31,7 @@ def decode_arinc_429_word(raw_str):
         final_bits = binary_str[::-1]
 
         parity = final_bits[0]
-        ssm    = final_bits[1:3]
-        data   = final_bits[3:24]
+        data   = final_bits[1:24]
         label  = final_bits[24:32]
 
         result = {
@@ -40,7 +39,6 @@ def decode_arinc_429_word(raw_str):
             "binary": final_bits,
             "fields": {
                 "parity": parity,
-                "ssm": ssm,
                 "data": data,
                 "label": label
             }

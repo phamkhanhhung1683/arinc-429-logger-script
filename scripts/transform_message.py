@@ -105,7 +105,6 @@ def transform_message(raw_message):
         "raw_fields": {
             "label": raw_message['fields']['label'],
             "data": raw_message['fields']['data'],
-            "ssm": raw_message['fields']['ssm'],
             "parity": raw_message['fields']['parity'],
         },
         "processed_fields": {
