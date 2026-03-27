@@ -5,7 +5,7 @@ from typing import TypedDict
 getcontext().prec = 40
 
 
-def process_data_by_label(label: str, raw_data: str):
+def process_data_by_label(label: str, raw_data: str) -> str | None:
     class LabelConfig(TypedDict):
         start_pos: int
         end_pos: int

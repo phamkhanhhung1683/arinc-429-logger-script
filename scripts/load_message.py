@@ -2,6 +2,7 @@ from datetime import datetime
 
 from schemas import ProcessedMessage
 
+
 def load_message(db_conn, message: ProcessedMessage):
     if not message:
         return
