@@ -1,4 +1,5 @@
 from decimal import Decimal, getcontext
+from typing import TypedDict
 
 
 getcontext().prec = 40
@@ -35,6 +36,77 @@ def get_processed_data(
     return format(result, 'f')
 
 
+def get_processed_data_by_label(label: str, raw_data: str):
+    class LabelConfig(TypedDict):
+        start_pos: int
+        end_pos: int
+        min_val: float
+        max_val: float
+
+    LABEL_CONFIG: dict[str, LabelConfig] = {
+        "210": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 90 * 2,
+        },
+        "211": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 90 * 2,
+        },
+        "223": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 65536 * 2,
+        },
+        "266": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 3034.3168 * 2,
+        },
+        "267": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 3034.3168 * 2,
+        },
+        "264": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 3034.3168 * 2,
+        },
+        "127": {
+            "start_pos": 2,
+            "end_pos": 23,
+            "min_val": 0,
+            "max_val": 104857.6 * 2,
+        },
+        "320": {
+            "start_pos": 2,
+            "end_pos": 17,
+            "min_val": 0,
+            "max_val": 16384 * 2,
+        },
+    }
+
+    config = LABEL_CONFIG.get(label)
+    if not config:
+        return None
+    
+    return get_processed_data(
+        raw_data,
+        config["start_pos"],
+        config["end_pos"],
+        config["min_val"],
+        config["max_val"],
+    )
+
+
 def transform_message(raw_message):
     if not raw_message:
         return None
@@ -53,23 +125,7 @@ def transform_message(raw_message):
     else:
         message_group = None
 
-    raw_data = raw_message['fields']['data']
-    processed_data = None
-    match processed_label:
-        case "210" | "211":
-            processed_data = get_processed_data(raw_data, 2, 23, 0, 90 * 2)
-
-        case "223":
-            processed_data = get_processed_data(raw_data, 2, 23, 0, 65536 * 2)
-
-        case "266" | "267" | "264":
-            processed_data = get_processed_data(raw_data, 2, 23, 0, 3034.3168 * 2)
-
-        case "127":
-            processed_data = get_processed_data(raw_data, 2, 23, 0, 104857.6 * 2)
-
-        case "320":
-            processed_data = get_processed_data(raw_data, 2, 17, 0, 16384 * 2)
+    processed_data = get_processed_data_by_label(processed_label, raw_message['fields']['data'])
 
     processed_message = {
         "channel": raw_message['channel'],
