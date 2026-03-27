@@ -3,7 +3,7 @@ import sqlite3
 
 from extract_message import extract_message
 from load_message import load_message
-from transform_message import transform_message
+from transform.transform_message import transform_message
 
 
 def get_db():
