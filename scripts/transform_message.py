@@ -1,15 +1,17 @@
 from decimal import Decimal, getcontext
 from typing import TypedDict
 
+from schemas import RawMessage, ProcessedMessage
+
 
 getcontext().prec = 40
 
 
-def transform_message(raw_message):
+def transform_message(raw_message: RawMessage) -> ProcessedMessage | None:
     if not raw_message:
         return None
 
-    bin_label = raw_message['fields']['label']
+    bin_label = raw_message['label']
     reversed_label = bin_label[::-1]
 
     try:    
@@ -23,24 +25,14 @@ def transform_message(raw_message):
     else:
         message_group = None
 
-    processed_data = get_processed_data_by_label(processed_label, raw_message['fields']['data'])
+    processed_data = get_processed_data_by_label(processed_label, raw_message['data'])
 
-    processed_message = {
-        "channel": raw_message['channel'],
-        "raw_message": raw_message['binary'],
-        "raw_fields": {
-            "label": raw_message['fields']['label'],
-            "data": raw_message['fields']['data'],
-            "parity": raw_message['fields']['parity'],
-        },
-        "processed_fields": {
-            "label": processed_label,
-            "data": processed_data
-        },
-        "message_group": message_group
+    return {
+        "raw_message": raw_message,
+        "label": processed_label,
+        "message_group": message_group,
+        "data": processed_data,
     }
-
-    return processed_message
 
 
 def get_processed_data(

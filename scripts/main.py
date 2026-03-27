@@ -15,14 +15,15 @@ def get_db():
         CREATE TABLE IF NOT EXISTS arinc_429_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME,
+            string TEXT,
             channel INTEGER,
             raw_message TEXT,
-            raw_parity_field TEXT,
-            raw_data_field TEXT,
-            raw_label_field TEXT,
-            processed_label_field TEXT,
+            raw_parity TEXT,
+            raw_data TEXT,
+            raw_label TEXT,
+            processed_label TEXT,
             message_group TEXT,
-            processed_data_field TEXT
+            processed_data TEXT
         )
     ''')
 

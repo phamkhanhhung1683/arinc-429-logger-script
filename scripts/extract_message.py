@@ -1,8 +1,11 @@
 import socket
 import time
+from typing import Iterator
+
+from schemas import RawMessage
 
 
-def extract_message(host: str, port: int):
+def extract_message(host: str, port: int) -> Iterator[RawMessage]:
     while True:
         buffer = ""
         try:
@@ -25,8 +28,9 @@ def extract_message(host: str, port: int):
 
                     for line in lines:
                         raw_message = decode_arinc_429_word(line)
-                        print(raw_message)
-                        yield raw_message
+                        if raw_message:
+                            print(raw_message)
+                            yield raw_message
 
 
         except Exception as e:
@@ -36,7 +40,7 @@ def extract_message(host: str, port: int):
         time.sleep(1)
 
 
-def decode_arinc_429_word(raw_str):
+def decode_arinc_429_word(raw_str: str) -> RawMessage | None:
     if not raw_str or len(raw_str) != 9:
         return None
 
@@ -63,16 +67,14 @@ def decode_arinc_429_word(raw_str):
         data   = final_bits[1:24]
         label  = final_bits[24:32]
 
-        result = {
+        return {
+            "string": raw_str,
             "channel": channel,
             "binary": final_bits,
-            "fields": {
-                "parity": parity,
-                "data": data,
-                "label": label
-            }
+            "parity": parity,
+            "data": data,
+            "label": label,
         }
-        return result
 
     except Exception as e:
         print(f"[ERROR] Decoding: {e}")
