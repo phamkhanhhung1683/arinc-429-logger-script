@@ -4,6 +4,37 @@ from decimal import Decimal, getcontext
 getcontext().prec = 40
 
 
+def get_processed_data(
+    binary_str: str,
+    start_pos: int,
+    end_pos: int,
+    min_val: float,
+    max_val: float
+) -> str | None:
+    if max_val < min_val:
+        return None
+    
+    if not (0 <= start_pos < end_pos <= len(binary_str)):
+        return None
+    bit_count = end_pos - start_pos
+
+    sub_str = binary_str[start_pos:end_pos]
+
+    try:
+        raw_val = int(sub_str, 2)
+    except ValueError:
+        return None
+        
+    min_decimal = Decimal(str(min_val))
+    max_decimal = Decimal(str(max_val))
+    
+    scale = (max_decimal - min_decimal) / (Decimal(2) ** bit_count)
+
+    result = (scale * Decimal(raw_val)).normalize() + min_decimal
+
+    return format(result, 'f')
+
+
 def binary_to_decimal(bin_str):
     try:
         decimal_val = int(bin_str, 2)
