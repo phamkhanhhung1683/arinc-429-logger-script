@@ -35,15 +35,6 @@ def get_processed_data(
     return format(result, 'f')
 
 
-def binary_to_decimal(bin_str):
-    try:
-        decimal_val = int(bin_str, 2)
-        return decimal_val
-    except ValueError as e:
-        print(f"[ERROR] Value error: {e}")
-        return None
-
-
 def transform_message(raw_message):
     if not raw_message:
         return None
@@ -62,42 +53,23 @@ def transform_message(raw_message):
     else:
         message_group = None
 
+    raw_data = raw_message['fields']['data']
     processed_data = None
     match processed_label:
         case "210" | "211":
-            raw_val = binary_to_decimal(raw_message['fields']['data'])
-            if raw_val is not None:
-                scale = Decimal("90") / (Decimal("2") ** 20)
-                processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = format(processed_data, 'f')
+            processed_data = get_processed_data(raw_data, 2, 23, 0, 90 * 2)
 
         case "223":
-            raw_val = binary_to_decimal(raw_message['fields']['data'])
-            if raw_val is not None:
-                scale = Decimal("65536") / (Decimal("2") ** 20)
-                processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = format(processed_data, 'f')
+            processed_data = get_processed_data(raw_data, 2, 23, 0, 65536 * 2)
 
         case "266" | "267" | "264":
-            raw_val = binary_to_decimal(raw_message['fields']['data'])
-            if raw_val is not None:
-                scale = Decimal("3034.3168") / (Decimal("2") ** 20)
-                processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = format(processed_data, 'f')
+            processed_data = get_processed_data(raw_data, 2, 23, 0, 3034.3168 * 2)
 
         case "127":
-            raw_val = binary_to_decimal(raw_message['fields']['data'])
-            if raw_val is not None:
-                scale = Decimal("104857.6") / (Decimal("2") ** 20)
-                processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = format(processed_data, 'f')
+            processed_data = get_processed_data(raw_data, 2, 23, 0, 104857.6 * 2)
 
         case "320":
-            raw_val = binary_to_decimal(raw_message['fields']['data'][:15])
-            if raw_val is not None:
-                scale = Decimal("16384") / (Decimal("2") ** 14)
-                processed_data = (scale * Decimal(raw_val)).normalize()
-                processed_data = format(processed_data, 'f')
+            processed_data = get_processed_data(raw_data, 2, 17, 0, 16384 * 2)
 
     processed_message = {
         "channel": raw_message['channel'],
