@@ -1,30 +1,37 @@
 from decimal import Decimal, getcontext
 import json
+from typing import TypedDict
 
 getcontext().prec = 40
 
 
 def get_processed_data(label: str, raw_data: str) -> str | None:
-    LABEL_CONFIG: dict[str, dict[str, dict[str, float | int]]] = {
+    class FieldConfig(TypedDict):
+        start_pos: int
+        end_pos: int
+        min_val: float
+        max_val: float
+
+    LABEL_CONFIG: dict[str, dict[str, FieldConfig]] = {
         # test
         # "030": {
-        #     "nam": {
+        #     "so_hieu_vi_tri": {
         #         "start_pos": 3,
-        #         "end_pos": 10,
+        #         "end_pos": 9,
         #         "min_val": 0,
-        #         "max_val": 128,
+        #         "max_val": 64,
         #     },
-        #     "thang": {
-        #         "start_pos": 10,
-        #         "end_pos": 14,
-        #         "min_val": 0,
-        #         "max_val": 16,
-        #     },
-        #     "ngay": {
-        #         "start_pos": 14,
+        #     "he_so_suy_hao": {
+        #         "start_pos": 9,
         #         "end_pos": 19,
         #         "min_val": 0,
-        #         "max_val": 32,
+        #         "max_val": 102.4,
+        #     },
+        #     "so_luong_ve_tinh": {
+        #         "start_pos": 19,
+        #         "end_pos": 23,
+        #         "min_val": 0,
+        #         "max_val": 16,
         #     },
         # },
         # A-737
@@ -130,6 +137,26 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 19,
                 "min_val": 0,
                 "max_val": 32,
+            },
+        },
+        "031": {
+            "so_hieu_vi_tri": {
+                "start_pos": 3,
+                "end_pos": 9,
+                "min_val": 0,
+                "max_val": 64,
+            },
+            "he_so_suy_hao": {
+                "start_pos": 9,
+                "end_pos": 19,
+                "min_val": 0,
+                "max_val": 102.4,
+            },
+            "so_luong_ve_tinh": {
+                "start_pos": 19,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 16,
             },
         },
         # Kh-31A
