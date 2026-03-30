@@ -9,17 +9,11 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
         # test
         # "030": {
         #     "value": {
-        #         "start_pos": 2,
-        #         "end_pos": 23,
-        #         "min_val": 0,
-        #         "max_val": 180,
-        #     },
-        #     "value1": {
-        #         "start_pos": 2,
-        #         "end_pos": 23,
-        #         "min_val": 0,
-        #         "max_val": 180,
-        #     },
+        #         "start_pos": 9,
+        #         "end_pos": 17,
+        #         "min_val": -45,
+        #         "max_val": 45,
+        #     }
         # },
         # A-737
         "210": {
@@ -90,9 +84,41 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
         "141": {
             "value": {
                 "start_pos": 5,
-                "end_pos": 17,
+                "end_pos": 16,
                 "min_val": 0,
                 "max_val": 120,
+            }
+        },
+        "154": {
+            "value": {
+                "start_pos": 6,
+                "end_pos": 14,
+                "min_val": 0,
+                "max_val": 1.1,
+            }
+        },
+        "156": {
+            "value": {
+                "start_pos": 6,
+                "end_pos": 16,
+                "min_val": -60,
+                "max_val": -1,
+            }
+        },
+        "150": {
+            "value": {
+                "start_pos": 9,
+                "end_pos": 17,
+                "min_val": -45,
+                "max_val": 45,
+            }
+        },
+        "151": {
+            "value": {
+                "start_pos": 9,
+                "end_pos": 17,
+                "min_val": -45,
+                "max_val": 45,
             }
         },
     }
