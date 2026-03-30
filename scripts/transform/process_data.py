@@ -64,6 +64,26 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "max_val": 6068.6336,
             },
         },
+        "324": {
+            "gio": {
+                "start_pos": 3,
+                "end_pos": 8,
+                "min_val": 0,
+                "max_val": 32,
+            },
+            "phut": {
+                "start_pos": 8,
+                "end_pos": 14,
+                "min_val": 0,
+                "max_val": 64,
+            },
+            "giay": {
+                "start_pos": 14,
+                "end_pos": 20,
+                "min_val": 0,
+                "max_val": 64,
+            },
+        },
         "127": {
             "value": {
                 "start_pos": 2,
