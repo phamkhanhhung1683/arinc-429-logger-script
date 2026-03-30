@@ -1,17 +1,17 @@
 import argparse
 import sqlite3
 
-from extract_message import extract_message
-from load_message import load_message
-from transform.transform_message import transform_message
+from scripts.extract.extract_message import extract_message
+from scripts.load.load_message import load_message
+from scripts.transform.transform_message import transform_message
 
 
 def get_db():
     conn = sqlite3.connect("arinc_429_messages.db")
-    conn.execute('PRAGMA journal_mode=WAL;')
+    conn.execute("PRAGMA journal_mode=WAL;")
 
     cursor = conn.cursor()
-    cursor.execute('''
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS arinc_429_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME,
@@ -23,26 +23,26 @@ def get_db():
             raw_label TEXT,
             processed_label TEXT,
             message_group TEXT,
+            message_description TEXT,
             processed_data TEXT
         )
-    ''')
+    """)
 
     return conn
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="TCP client receiving data from an ARINC 429 LAN board")
-    parser.add_argument(
-        "--host", 
-        type=str, 
-        default="192.168.24.190", 
-        help="Board IP address (default: 192.168.24.190)"
+    parser = argparse.ArgumentParser(
+        description="TCP client receiving data from an ARINC 429 LAN board"
     )
     parser.add_argument(
-        "--port", 
-        type=int, 
-        default=10001, 
-        help="Board port number (default: 10001)"
+        "--host",
+        type=str,
+        default="192.168.24.190",
+        help="Board IP address (default: 192.168.24.190)",
+    )
+    parser.add_argument(
+        "--port", type=int, default=10001, help="Board port number (default: 10001)"
     )
     args = parser.parse_args()
 

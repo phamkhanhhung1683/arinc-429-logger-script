@@ -9,8 +9,10 @@ class RawMessage(TypedDict):
     data: str
     label: str
 
+
 class ProcessedMessage(TypedDict):
     raw_message: RawMessage
     label: str
     message_group: str
+    message_description: str
     data: str

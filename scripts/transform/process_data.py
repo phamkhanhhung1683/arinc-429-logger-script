@@ -1,11 +1,10 @@
 from decimal import Decimal, getcontext
 from typing import TypedDict
 
-
 getcontext().prec = 40
 
 
-def process_data_by_label(label: str, raw_data: str) -> str | None:
+def process_data(label: str, raw_data: str) -> str | None:
     class LabelConfig(TypedDict):
         start_pos: int
         end_pos: int
@@ -66,7 +65,7 @@ def process_data_by_label(label: str, raw_data: str) -> str | None:
     config = LABEL_CONFIG.get(label)
     if not config:
         return None
-    
+
     return compute_data(
         raw_data,
         config["start_pos"],
@@ -77,15 +76,11 @@ def process_data_by_label(label: str, raw_data: str) -> str | None:
 
 
 def compute_data(
-    binary_str: str,
-    start_pos: int,
-    end_pos: int,
-    min_val: float,
-    max_val: float
+    binary_str: str, start_pos: int, end_pos: int, min_val: float, max_val: float
 ) -> str | None:
     if max_val < min_val:
         return None
-    
+
     if not (0 <= start_pos < end_pos <= len(binary_str)):
         return None
     bit_count = end_pos - start_pos
@@ -96,12 +91,12 @@ def compute_data(
         raw_val = int(sub_str, 2)
     except ValueError:
         return None
-        
+
     min_decimal = Decimal(str(min_val))
     max_decimal = Decimal(str(max_val))
-    
+
     scale = (max_decimal - min_decimal) / (Decimal(2) ** bit_count)
 
     result = (scale * Decimal(raw_val)).normalize() + min_decimal
 
-    return format(result, 'f')
+    return format(result, "f")

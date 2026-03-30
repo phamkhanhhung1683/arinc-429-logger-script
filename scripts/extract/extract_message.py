@@ -2,7 +2,7 @@ import socket
 import time
 from typing import Iterator
 
-from schemas import RawMessage
+from scripts.schemas import RawMessage
 
 
 def extract_message(host: str, port: int) -> Iterator[RawMessage]:
@@ -10,7 +10,9 @@ def extract_message(host: str, port: int) -> Iterator[RawMessage]:
         buffer = ""
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-                print(f"[INFO] Connecting to the ARINC 429 LAN board at {host}:{port}...")
+                print(
+                    f"[INFO] Connecting to the ARINC 429 LAN board at {host}:{port}..."
+                )
                 client_socket.settimeout(5)
                 client_socket.connect((host, port))
                 print(f"[INFO] Connected to the ARINC 429 LAN board at {host}:{port}")
@@ -22,8 +24,8 @@ def extract_message(host: str, port: int) -> Iterator[RawMessage]:
                         print("[INFO] Connection closed")
                         break
 
-                    buffer += data.decode('ascii', errors='ignore')
-                    lines = buffer.split('\n')
+                    buffer += data.decode("ascii", errors="ignore")
+                    lines = buffer.split("\n")
                     buffer = lines.pop()
 
                     for line in lines:
@@ -31,7 +33,6 @@ def extract_message(host: str, port: int) -> Iterator[RawMessage]:
                         if raw_message:
                             print(raw_message)
                             yield raw_message
-
 
         except Exception as e:
             print(f"[ERROR] Network: {e}")
@@ -57,15 +58,15 @@ def decode_arinc_429_word(raw_str: str) -> RawMessage | None:
         for char in reversed_payload:
             val = ord(char) - 97
             if 0 <= val <= 15:
-                binary_str += format(val, '04b')
+                binary_str += format(val, "04b")
             else:
                 return None
 
         final_bits = binary_str[::-1]
 
         parity = final_bits[0]
-        data   = final_bits[1:24]
-        label  = final_bits[24:32]
+        data = final_bits[1:24]
+        label = final_bits[24:32]
 
         return {
             "string": raw_str,

@@ -1,8 +1,9 @@
-import socket
 import time
+import socket
 
 HOST = "0.0.0.0"
 PORT = 10001
+
 
 def run_server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
@@ -19,9 +20,10 @@ def run_server():
             try:
                 while True:
                     conn.sendall(b"Abbeilkib\n")
-                    time.sleep(0.1)  # tránh spam quá nhanh
+                    time.sleep(0.1)
             except (BrokenPipeError, ConnectionResetError):
                 print("Client disconnected")
+
 
 if __name__ == "__main__":
     run_server()
