@@ -8,12 +8,24 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
     LABEL_CONFIG: dict[str, dict[str, dict[str, float | int]]] = {
         # test
         # "030": {
-        #     "value": {
-        #         "start_pos": 9,
-        #         "end_pos": 17,
-        #         "min_val": -45,
-        #         "max_val": 45,
-        #     }
+        #     "nam": {
+        #         "start_pos": 3,
+        #         "end_pos": 10,
+        #         "min_val": 0,
+        #         "max_val": 128,
+        #     },
+        #     "thang": {
+        #         "start_pos": 10,
+        #         "end_pos": 14,
+        #         "min_val": 0,
+        #         "max_val": 16,
+        #     },
+        #     "ngay": {
+        #         "start_pos": 14,
+        #         "end_pos": 19,
+        #         "min_val": 0,
+        #         "max_val": 32,
+        #     },
         # },
         # A-737
         "210": {
@@ -98,6 +110,26 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 17,
                 "min_val": 0,
                 "max_val": 32768,
+            },
+        },
+        "126": {
+            "nam": {
+                "start_pos": 3,
+                "end_pos": 10,
+                "min_val": 0,
+                "max_val": 128,
+            },
+            "thang": {
+                "start_pos": 10,
+                "end_pos": 14,
+                "min_val": 0,
+                "max_val": 16,
+            },
+            "ngay": {
+                "start_pos": 14,
+                "end_pos": 19,
+                "min_val": 0,
+                "max_val": 32,
             },
         },
         # Kh-31A

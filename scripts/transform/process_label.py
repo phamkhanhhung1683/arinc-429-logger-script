@@ -53,7 +53,7 @@ def get_message_description(processed_label: str) -> str | None:
         "324": "Thời gian ghi dữ liệu (giờ - phút - giây)",
         "127": "Sai lệch thời gian",
         "320": "Sai số vị trí ước tính",
-        "126": "Date (năm - tháng - ngày)",
+        "126": "Thời gian (năm - tháng - ngày)",
         "031": "Loại vệ tinh (số hiệu vị trí - hệ số suy hao - số lượng vệ tinh)",
         "030": "Số lượng vệ tinh - tỷ số tín trên tạp - số kênh thu",
         "377": "Góc phương vị - góc ngẩng",
