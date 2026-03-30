@@ -1,4 +1,4 @@
-def process_label(raw_label: str) -> str | None:
+def get_processed_label(raw_label: str) -> str | None:
     reversed_raw_label = raw_label[::-1]
 
     try:
@@ -24,7 +24,6 @@ def get_message_group(processed_label: str) -> str | None:
         "031": "A-737",
         "030": "A-737",
         "377": "A-737",
-
         "157": "Kh-31A (3B, 4B)",
         "141": "Kh-31A (3B, 4B)",
         "154": "Kh-31A (3B, 4B)",
@@ -34,7 +33,6 @@ def get_message_group(processed_label: str) -> str | None:
         "151": "Kh-31A (3B, 4B)",
         "155": "Kh-31A (3B, 4B)",
         "201": "Kh-31A (3B, 4B)",
-
         "153": "A-737 / Kh-31A (3B, 4B)",
     }
 

@@ -1,78 +1,124 @@
 from decimal import Decimal, getcontext
-from typing import TypedDict
+import json
 
 getcontext().prec = 40
 
 
-def process_data(label: str, raw_data: str) -> str | None:
-    class LabelConfig(TypedDict):
-        start_pos: int
-        end_pos: int
-        min_val: float
-        max_val: float
-
-    LABEL_CONFIG: dict[str, LabelConfig] = {
+def get_processed_data(label: str, raw_data: str) -> str | None:
+    LABEL_CONFIG: dict[str, dict[str, dict[str, float | int]]] = {
+        # test
+        # "030": {
+        #     "value": {
+        #         "start_pos": 2,
+        #         "end_pos": 23,
+        #         "min_val": 0,
+        #         "max_val": 180,
+        #     },
+        #     "value1": {
+        #         "start_pos": 2,
+        #         "end_pos": 23,
+        #         "min_val": 0,
+        #         "max_val": 180,
+        #     },
+        # },
+        # A-737
         "210": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 90 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 180,
+            },
         },
         "211": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 90 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 180,
+            },
         },
         "223": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 65536 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 131072,
+            },
         },
         "266": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 3034.3168 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 6068.6336,
+            },
         },
         "267": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 3034.3168 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 6068.6336,
+            },
         },
         "264": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 3034.3168 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 6068.6336,
+            },
         },
         "127": {
-            "start_pos": 2,
-            "end_pos": 23,
-            "min_val": 0,
-            "max_val": 104857.6 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 23,
+                "min_val": 0,
+                "max_val": 209715.2,
+            },
         },
         "320": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 0,
-            "max_val": 16384 * 2,
+            "value": {
+                "start_pos": 2,
+                "end_pos": 17,
+                "min_val": 0,
+                "max_val": 32768,
+            },
+        },
+        # Kh-31A
+        "141": {
+            "value": {
+                "start_pos": 5,
+                "end_pos": 17,
+                "min_val": 0,
+                "max_val": 120,
+            }
         },
     }
 
-    config = LABEL_CONFIG.get(label)
-    if not config:
+    configs = LABEL_CONFIG.get(label)
+    if not configs:
         return None
 
-    return compute_data(
-        raw_data,
-        config["start_pos"],
-        config["end_pos"],
-        config["min_val"],
-        config["max_val"],
-    )
+    result: dict[str, str] = {}
+
+    for name, cfg in LABEL_CONFIG[label].items():
+        value = compute_data(
+            raw_data,
+            cfg["start_pos"],
+            cfg["end_pos"],
+            cfg["min_val"],
+            cfg["max_val"],
+        )
+
+        if value is not None:
+            result[name] = value
+
+    if not result:
+        return None
+
+    return json.dumps(result, ensure_ascii=False)
 
 
 def compute_data(
