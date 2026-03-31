@@ -49,7 +49,7 @@ def run_server():
 
             try:
                 while True:
-                    binary = "10001000001000011101010100010000"
+                    binary = "10001000001000011101010111111111"
                     encoded = encode_arinc_429_word(binary)
                     if encoded is None:
                         print("Encode failed")

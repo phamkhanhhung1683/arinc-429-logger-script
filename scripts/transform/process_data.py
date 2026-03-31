@@ -172,6 +172,20 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "max_val": 16,
             },
         },
+        "377": {
+            "goc_phuong_vi": {
+                "start_pos": 2,
+                "end_pos": 11,
+                "min_val": 0,
+                "max_val": 360,
+            },
+            "goc_ngang": {
+                "start_pos": 11,
+                "end_pos": 18,
+                "min_val": 0,
+                "max_val": 90,
+            },
+        },
         # Kh-31A
         "141": {
             "value": {
