@@ -30,6 +30,20 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "max_val": 180,
             },
         },
+        "010": {
+            "vi_do_mo_rong": {
+                "start_pos": 2,
+                "end_pos": 12,
+                "min_val": 0,
+                "max_val": 0.000086,
+            },
+            "kinh_do_mo_rong": {
+                "start_pos": 12,
+                "end_pos": 22,
+                "min_val": 0,
+                "max_val": 0.000086,
+            },
+        },
         "223": {
             "value": {
                 "start_pos": 2,
