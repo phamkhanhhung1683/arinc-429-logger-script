@@ -10,13 +10,7 @@ def get_processed_label(raw_label: str) -> str | None:
 def get_message_group(processed_label: str) -> str | None:
     LABEL_MAP = {
         "317": "A-737",
-        "210": "A-737",
-        "211": "A-737",
         "010": "A-737",
-        "223": "A-737",
-        "266": "A-737",
-        "267": "A-737",
-        "264": "A-737",
         "324": "A-737",
         "127": "A-737",
         "320": "A-737",
@@ -24,6 +18,7 @@ def get_message_group(processed_label: str) -> str | None:
         "031": "A-737",
         "030": "A-737",
         "377": "A-737",
+
         "157": "Kh-31A (3B, 4B)",
         "141": "Kh-31A (3B, 4B)",
         "154": "Kh-31A (3B, 4B)",
@@ -33,7 +28,52 @@ def get_message_group(processed_label: str) -> str | None:
         "151": "Kh-31A (3B, 4B)",
         "155": "Kh-31A (3B, 4B)",
         "201": "Kh-31A (3B, 4B)",
+
+        "331": "PNK (5A)",
+        "330": "PNK (5A)",
+        "277": "PNK (5A)",
+        "273": "PNK (5A)",
+
+        "340": "PNK (12A)",
+
+        "224": "PNK (18A)",
+        "226": "PNK (18A)",
+        "225": "PNK (18A)",
+        "233": "PNK (18A)",
+
+        "212": "PNK (20A)",
+
+        "000": "PNK (21A)",
+        "240": "PNK (21A)",
+        "241": "PNK (21A)",
+        "242": "PNK (21A)",
+        "204": "PNK (21A)",
+        "272": "PNK (21A)",
+
+        "370": "PNK (25A)",
+        "322": "PNK (25A)",
+        "323": "PNK (25A)",
+        "371": "PNK (25A)",
+        "326": "PNK (25A)",
+        "327": "PNK (25A)",
+        "227": "PNK (25A)",
+        "321": "PNK (25A)",
+        "373": "PNK (25A)",
+
+        "332": "PNK (41A) / PNK (11B)",
+        "346": "PNK (25A) / PNK (41A) / PNK (11B)",
+        "376": "PNK (20A) / PNK (41A) / PNK (11B)",
+        "214": "PNK (20A) / PNK (41A) / PNK (11B)",
+        "221": "PNK (18A) / PNK (41A) / PNK (11B)",
+        "230": "PNK (18A) / PNK (41A) / PNK (11B)",
+
         "153": "A-737 / Kh-31A (3B, 4B)",
+        "210": "A-737 / PNK (20A)",
+        "211": "A-737 / PNK (20A)",
+        "223": "A-737 / PNK (18A)",
+        "264": "A-737 / PNK (5A)",
+        "266": "A-737 / PNK (5A) / PNK (20A)",
+        "267": "A-737 / PNK (5A) / PNK (20A)",
     }
 
     return LABEL_MAP.get(processed_label)
