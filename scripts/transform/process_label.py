@@ -11,6 +11,7 @@ def get_message_group(processed_label: str) -> str | None:
     LABEL_MAP = {
         "317": "A-737",
         "010": "A-737",
+        "264": "A-737",
         "324": "A-737",
         "127": "A-737",
         "320": "A-737",
@@ -71,9 +72,8 @@ def get_message_group(processed_label: str) -> str | None:
         "210": "A-737 / PNK (20A)",
         "211": "A-737 / PNK (20A)",
         "223": "A-737 / PNK (18A)",
-        "264": "A-737 / PNK (5A)",
-        "266": "A-737 / PNK (5A) / PNK (20A)",
-        "267": "A-737 / PNK (5A) / PNK (20A)",
+        "266": "A-737 / PNK (20A)",
+        "267": "A-737 / PNK (20A)",
     }
 
     return LABEL_MAP.get(processed_label)

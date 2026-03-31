@@ -6,7 +6,11 @@ PORT = 10001
 
 
 def encode_arinc_429_word(binary_str: str, channel: int = 1) -> str | None:
-    if not binary_str or len(binary_str) != 32 or any(c not in "01" for c in binary_str):
+    if (
+        not binary_str
+        or len(binary_str) != 32
+        or any(c not in "01" for c in binary_str)
+    ):
         return None
 
     try:
@@ -16,7 +20,7 @@ def encode_arinc_429_word(binary_str: str, channel: int = 1) -> str | None:
 
         reversed_bits = binary_str[::-1]
 
-        nibbles = [reversed_bits[i:i+4] for i in range(0, 32, 4)]
+        nibbles = [reversed_bits[i : i + 4] for i in range(0, 32, 4)]
 
         payload_chars = []
         for nibble in nibbles:

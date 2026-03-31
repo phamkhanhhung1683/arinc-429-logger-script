@@ -227,6 +227,40 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "max_val": 45,
             },
         },
+        # PNK (5A)
+        "331": {
+            "value": {
+                "start_pos": 0,
+                "end_pos": 15,
+                "min_val": -90,
+                "max_val": 90,
+            }
+        },
+        "330": {
+            "value": {
+                "start_pos": 0,
+                "end_pos": 15,
+                "min_val": -180,
+                "max_val": 180,
+            }
+        },
+        "277": {
+            "value": {
+                "start_pos": 0,
+                "end_pos": 10,
+                "min_val": -180,
+                "max_val": 180,
+            }
+        },
+        "273": {
+            "value": {
+                "start_pos": 0,
+                "end_pos": 17,
+                "min_val": -180,
+                "max_val": 180,
+            }
+        },
+
     }
 
     configs = LABEL_CONFIG.get(label)
