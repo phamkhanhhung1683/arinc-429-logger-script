@@ -13,27 +13,6 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
         max_val: float
 
     LABEL_CONFIG: dict[str, dict[str, FieldConfig]] = {
-        # test
-        # "030": {
-        #     "so_hieu_vi_tri": {
-        #         "start_pos": 3,
-        #         "end_pos": 9,
-        #         "min_val": 0,
-        #         "max_val": 64,
-        #     },
-        #     "he_so_suy_hao": {
-        #         "start_pos": 9,
-        #         "end_pos": 19,
-        #         "min_val": 0,
-        #         "max_val": 102.4,
-        #     },
-        #     "so_luong_ve_tinh": {
-        #         "start_pos": 19,
-        #         "end_pos": 23,
-        #         "min_val": 0,
-        #         "max_val": 16,
-        #     },
-        # },
         # A-737
         "210": {
             "value": {
@@ -159,6 +138,26 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "max_val": 16,
             },
         },
+        "030": {
+            "so_luong_ve_tinh": {
+                "start_pos": 3,
+                "end_pos": 7,
+                "min_val": 0,
+                "max_val": 16,
+            },
+            "ty_so_tin_tren_tap": {
+                "start_pos": 7,
+                "end_pos": 15,
+                "min_val": 0,
+                "max_val": 25.6,
+            },
+            "so_kenh_thu": {
+                "start_pos": 15,
+                "end_pos": 19,
+                "min_val": 0,
+                "max_val": 16,
+            },
+        },
         # Kh-31A
         "141": {
             "value": {
@@ -166,7 +165,7 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 16,
                 "min_val": 0,
                 "max_val": 120,
-            }
+            },
         },
         "154": {
             "value": {
@@ -174,7 +173,7 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 14,
                 "min_val": 0,
                 "max_val": 1.1,
-            }
+            },
         },
         "156": {
             "value": {
@@ -182,7 +181,7 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 16,
                 "min_val": -60,
                 "max_val": -1,
-            }
+            },
         },
         "150": {
             "value": {
@@ -190,7 +189,7 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 17,
                 "min_val": -45,
                 "max_val": 45,
-            }
+            },
         },
         "151": {
             "value": {
@@ -198,7 +197,7 @@ def get_processed_data(label: str, raw_data: str) -> str | None:
                 "end_pos": 17,
                 "min_val": -45,
                 "max_val": 45,
-            }
+            },
         },
     }
 
