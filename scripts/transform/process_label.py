@@ -1,3 +1,6 @@
+from scripts.transform.label_config import LABEL_DESCRIPTIONS, LABEL_GROUPS
+
+
 def get_processed_label(raw_label: str) -> str | None:
     reversed_raw_label = raw_label[::-1]
 
@@ -8,107 +11,8 @@ def get_processed_label(raw_label: str) -> str | None:
 
 
 def get_message_group(processed_label: str) -> str | None:
-    LABEL_MAP = {
-        "317": "A-737",
-        "010": "A-737",
-        "264": "A-737",
-        "324": "A-737",
-        "127": "A-737",
-        "320": "A-737",
-        "126": "A-737",
-        "031": "A-737",
-        "030": "A-737",
-        "377": "A-737",
-
-        "157": "Kh-31A (3B, 4B)",
-        "141": "Kh-31A (3B, 4B)",
-        "154": "Kh-31A (3B, 4B)",
-        "156": "Kh-31A (3B, 4B)",
-        "152": "Kh-31A (3B, 4B)",
-        "150": "Kh-31A (3B, 4B)",
-        "151": "Kh-31A (3B, 4B)",
-        "155": "Kh-31A (3B, 4B)",
-        "201": "Kh-31A (3B, 4B)",
-
-        "331": "PNK (5A)",
-        "330": "PNK (5A)",
-        "277": "PNK (5A)",
-        "273": "PNK (5A)",
-
-        "340": "PNK (12A)",
-
-        "224": "PNK (18A)",
-        "226": "PNK (18A)",
-        "225": "PNK (18A)",
-        "233": "PNK (18A)",
-
-        "212": "PNK (20A)",
-
-        "000": "PNK (21A)",
-        "240": "PNK (21A)",
-        "241": "PNK (21A)",
-        "242": "PNK (21A)",
-        "204": "PNK (21A)",
-        "272": "PNK (21A)",
-
-        "370": "PNK (25A)",
-        "322": "PNK (25A)",
-        "323": "PNK (25A)",
-        "371": "PNK (25A)",
-        "326": "PNK (25A)",
-        "327": "PNK (25A)",
-        "227": "PNK (25A)",
-        "321": "PNK (25A)",
-        "373": "PNK (25A)",
-
-        "332": "PNK (41A) / PNK (11B)",
-        "346": "PNK (25A) / PNK (41A) / PNK (11B)",
-        "376": "PNK (20A) / PNK (41A) / PNK (11B)",
-        "214": "PNK (20A) / PNK (41A) / PNK (11B)",
-        "221": "PNK (18A) / PNK (41A) / PNK (11B)",
-        "230": "PNK (18A) / PNK (41A) / PNK (11B)",
-
-        "153": "A-737 / Kh-31A (3B, 4B)",
-        "210": "A-737 / PNK (20A)",
-        "211": "A-737 / PNK (20A)",
-        "223": "A-737 / PNK (18A)",
-        "266": "A-737 / PNK (20A)",
-        "267": "A-737 / PNK (20A)",
-    }
-
-    return LABEL_MAP.get(processed_label)
+    return LABEL_GROUPS.get(processed_label)
 
 
 def get_message_description(processed_label: str) -> str | None:
-    LABEL_DESCRIPTIONS = {
-        # A-737
-        "317": "Từ nhận dạng",
-        "210": "Vĩ độ (độ)",
-        "211": "Kinh độ (độ)",
-        "010": "Vĩ độ mở rộng / kinh độ mở rộng",
-        "223": "Độ cao của anten vệ tinh so với mực nước biển",
-        "266": "Vận tốc theo hướng bắc",
-        "267": "Vận tốc theo phương đông",
-        "264": "Vận tốc theo hướng thẳng",
-        "324": "Thời gian ghi dữ liệu (giờ - phút - giây)",
-        "127": "Sai lệch thời gian",
-        "320": "Sai số vị trí ước tính",
-        "126": "Thời gian (năm - tháng - ngày)",
-        "031": "Loại vệ tinh (số hiệu vị trí - hệ số suy hao - số lượng vệ tinh)",
-        "030": "Số lượng vệ tinh - tỷ số tín trên tạp - số kênh thu",
-        "377": "Góc phương vị - góc ngẩng",
-        # Kh-31A
-        "157": "Từ mã kiểm tra",
-        "141": "Cự ly",
-        "154": "Tốc độ tiếp cận",
-        "156": "Cự ly kích hoạt",
-        "152": "Góc tà / góc tà theo đường chân trời",
-        "150": "Góc nghiêng",
-        "151": "Góc ngẩng",
-        "155": "Lệnh đơn",
-        "201": "Từ mã SUO",
-        # A-737 / Kh-31A
-        "153": "Mã phiên bản phần mềm (năm - tháng - lĩnh vực - loại phần mềm - mã số PMO) (A-737) / góc phương vị (Kh-31A) / cự ly bổ nhào (Kh-31A)",
-    }
-
     return LABEL_DESCRIPTIONS.get(processed_label)

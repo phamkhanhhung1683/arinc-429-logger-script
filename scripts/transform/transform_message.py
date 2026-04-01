@@ -1,5 +1,5 @@
-from .process_data import get_processed_data
-from .process_label import (
+from scripts.transform.process_data import get_processed_data
+from scripts.transform.process_label import (
     get_processed_label,
     get_message_group,
     get_message_description,
