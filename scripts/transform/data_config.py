@@ -8,7 +8,7 @@ class FieldConfig(TypedDict):
     max_val: float
 
 
-DATA_CONFIG: dict[str, dict[str, FieldConfig]] = {
+DATA_CONFIGS: dict[str, dict[str, FieldConfig]] = {
     # A-737
     "210": {
         "value": {
@@ -301,7 +301,7 @@ DATA_CONFIG: dict[str, dict[str, FieldConfig]] = {
     },
     # PNK (21A)
     "241": {
-        "value": {
+        "pnk_21a_value": {
             "start_pos": 0,
             "end_pos": 17,
             "min_val": -90,
@@ -347,6 +347,46 @@ DATA_CONFIG: dict[str, dict[str, FieldConfig]] = {
             "end_pos": 17,
             "min_val": -10,
             "max_val": 5,
+        }
+    },
+    "371": {
+        "value": {
+            "start_pos": 0,
+            "end_pos": 17,
+            "min_val": 0,
+            "max_val": 15,
+        }
+    },
+    "327": {
+        "value": {
+            "start_pos": 0,
+            "end_pos": 17,
+            "min_val": -4,
+            "max_val": 1.5,
+        }
+    },
+    "227": {
+        "value": {
+            "start_pos": 2,
+            "end_pos": 17,
+            "min_val": 500,
+            "max_val": 1800,
+        }
+    },
+    "321": {
+        "value": {
+            "start_pos": 2,
+            "end_pos": 17,
+            "min_val": 200,
+            "max_val": 500,
+        }
+    },
+    "373": {
+        "value": {
+            "start_pos": 2,
+            "end_pos": 17,
+            "min_val": 0.7,
+            "max_val": 3,
         }
     },
 }

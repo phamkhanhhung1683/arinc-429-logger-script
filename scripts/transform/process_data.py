@@ -1,19 +1,19 @@
 from decimal import Decimal, getcontext
 import json
 
-from scripts.transform.data_config import DATA_CONFIG
+from scripts.transform.data_config import DATA_CONFIGS
 
 getcontext().prec = 40
 
 
 def get_processed_data(label: str, raw_data: str) -> str | None:
-    configs = DATA_CONFIG.get(label)
+    configs = DATA_CONFIGS.get(label)
     if not configs:
         return None
 
     result: dict[str, str] = {}
 
-    for name, cfg in DATA_CONFIG[label].items():
+    for name, cfg in DATA_CONFIGS[label].items():
         value = compute_data(
             raw_data,
             cfg["start_pos"],
