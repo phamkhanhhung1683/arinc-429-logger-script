@@ -21,6 +21,7 @@ def get_db():
             raw_parity TEXT,
             raw_data TEXT,
             raw_label TEXT,
+            parity_ok BOOLEAN,
             processed_label TEXT,
             message_group TEXT,
             message_description TEXT,

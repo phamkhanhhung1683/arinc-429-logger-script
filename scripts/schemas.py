@@ -12,6 +12,7 @@ class RawMessage(TypedDict):
 
 class ProcessedMessage(TypedDict):
     raw_message: RawMessage
+    parity_ok: bool
     label: str
     message_group: str
     message_description: str

@@ -23,11 +23,12 @@ def load_message(db_conn, message: ProcessedMessage):
             raw_parity,
             raw_data,
             raw_label,
+            parity_ok,
             processed_label,
             message_group,
             message_description,
             processed_data)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
             (
                 now,
@@ -37,6 +38,7 @@ def load_message(db_conn, message: ProcessedMessage):
                 message["raw_message"]["parity"],
                 message["raw_message"]["data"],
                 message["raw_message"]["label"],
+                message["parity_ok"],
                 message["label"],
                 message["message_group"],
                 message["message_description"],
