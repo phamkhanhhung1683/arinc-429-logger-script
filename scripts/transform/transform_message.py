@@ -11,7 +11,7 @@ from scripts.schemas import RawMessage, ProcessedMessage
 def transform_message(raw_message: RawMessage) -> ProcessedMessage | None:
     if not raw_message:
         return None
-    
+
     parity_ok = get_parity_check(raw_message["binary"])
 
     processed_label = get_processed_label(raw_message["label"])
