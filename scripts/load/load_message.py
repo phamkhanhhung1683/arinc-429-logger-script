@@ -1,23 +1,40 @@
-from datetime import datetime
+import sqlite3
 
 from scripts.schemas import ProcessedMessage
 
+conn = sqlite3.connect("arinc_429_messages.db")
+conn.execute("PRAGMA journal_mode=WAL;")
 
-def load_message(db_conn, message: ProcessedMessage):
+cursor = conn.cursor()
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS arinc_429_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp DATETIME,
+        raw_string TEXT,
+        channel INTEGER,
+        raw_message TEXT,
+        raw_parity TEXT,
+        raw_data TEXT,
+        raw_label TEXT,
+        parity_ok BOOLEAN,
+        processed_label TEXT,
+        message_group TEXT,
+        message_description TEXT,
+        processed_data TEXT
+    )
+""")
+
+
+def load_message(message: ProcessedMessage):
     if not message:
         return
 
     try:
-        cursor = db_conn.cursor()
-
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-        print(now)
-
         cursor.execute(
             """
             INSERT INTO arinc_429_messages 
             (timestamp,
-            string,
+            raw_string,
             channel,
             raw_message,
             raw_parity,
@@ -31,7 +48,7 @@ def load_message(db_conn, message: ProcessedMessage):
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
             (
-                now,
+                message["raw_message"]["timestamp"],
                 message["raw_message"]["string"],
                 message["raw_message"]["channel"],
                 message["raw_message"]["binary"],
@@ -45,7 +62,7 @@ def load_message(db_conn, message: ProcessedMessage):
                 message["data"],
             ),
         )
-        db_conn.commit()
+        conn.commit()
 
     except Exception as e:
         print(f"[ERROR] Database insertion: {e}")

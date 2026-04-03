@@ -183,210 +183,210 @@ DATA_CONFIGS: dict[str, dict[str, FieldConfig]] = {
         },
     },
     # Kh-31A
-    "141": {
-        "value": {
-            "start_pos": 5,
-            "end_pos": 16,
-            "min_val": 0,
-            "max_val": 120,
-        },
-    },
-    "154": {
-        "value": {
-            "start_pos": 6,
-            "end_pos": 14,
-            "min_val": 0,
-            "max_val": 1.1,
-        },
-    },
-    "156": {
-        "value": {
-            "start_pos": 6,
-            "end_pos": 16,
-            "min_val": -60,
-            "max_val": -1,
-        },
-    },
-    "150": {
-        "value": {
-            "start_pos": 9,
-            "end_pos": 17,
-            "min_val": -45,
-            "max_val": 45,
-        },
-    },
-    "151": {
-        "value": {
-            "start_pos": 9,
-            "end_pos": 17,
-            "min_val": -45,
-            "max_val": 45,
-        },
-    },
-    # PNK (5A)
-    "331": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 15,
-            "min_val": -90,
-            "max_val": 90,
-        }
-    },
-    "330": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 15,
-            "min_val": -180,
-            "max_val": 180,
-        }
-    },
-    "277": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 10,
-            "min_val": -180,
-            "max_val": 180,
-        }
-    },
-    "273": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -180,
-            "max_val": 180,
-        }
-    },
-    # PNK (12A)
-    "340": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 20,
-            "min_val": 0,
-            "max_val": 6000,
-        }
-    },
-    # PNK (18A)
-    "224": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 0,
-            "max_val": 30000,
-        }
-    },
-    "226": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 150,
-            "max_val": 1600,
-        }
-    },
-    "225": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 0.3,
-            "max_val": 3.5,
-        }
-    },
-    # PNK (20A)
-    "212": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": 0,
-            "max_val": 2500,
-        }
-    },
-    # PNK (21A)
-    "241": {
-        "pnk_21a_value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -90,
-            "max_val": 90,
-        }
-    },
-    "242": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -180,
-            "max_val": 180,
-        }
-    },
-    "272": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 0,
-            "max_val": 20000,
-        }
-    },
-    # PNK (25A)
-    "370": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -10,
-            "max_val": 45,
-        }
-    },
-    "322": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 5,
-            "max_val": 40,
-        }
-    },
-    "323": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -10,
-            "max_val": 5,
-        }
-    },
-    "371": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": 0,
-            "max_val": 15,
-        }
-    },
-    "327": {
-        "value": {
-            "start_pos": 0,
-            "end_pos": 17,
-            "min_val": -4,
-            "max_val": 1.5,
-        }
-    },
-    "227": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 500,
-            "max_val": 1800,
-        }
-    },
-    "321": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 200,
-            "max_val": 500,
-        }
-    },
-    "373": {
-        "value": {
-            "start_pos": 2,
-            "end_pos": 17,
-            "min_val": 0.7,
-            "max_val": 3,
-        }
-    },
+    # "141": {
+    #     "value": {
+    #         "start_pos": 5,
+    #         "end_pos": 16,
+    #         "min_val": 0,
+    #         "max_val": 120,
+    #     },
+    # },
+    # "154": {
+    #     "value": {
+    #         "start_pos": 6,
+    #         "end_pos": 14,
+    #         "min_val": 0,
+    #         "max_val": 1.1,
+    #     },
+    # },
+    # "156": {
+    #     "value": {
+    #         "start_pos": 6,
+    #         "end_pos": 16,
+    #         "min_val": -60,
+    #         "max_val": -1,
+    #     },
+    # },
+    # "150": {
+    #     "value": {
+    #         "start_pos": 9,
+    #         "end_pos": 17,
+    #         "min_val": -45,
+    #         "max_val": 45,
+    #     },
+    # },
+    # "151": {
+    #     "value": {
+    #         "start_pos": 9,
+    #         "end_pos": 17,
+    #         "min_val": -45,
+    #         "max_val": 45,
+    #     },
+    # },
+    # # PNK (5A)
+    # "331": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 15,
+    #         "min_val": -90,
+    #         "max_val": 90,
+    #     }
+    # },
+    # "330": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 15,
+    #         "min_val": -180,
+    #         "max_val": 180,
+    #     }
+    # },
+    # "277": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 10,
+    #         "min_val": -180,
+    #         "max_val": 180,
+    #     }
+    # },
+    # "273": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -180,
+    #         "max_val": 180,
+    #     }
+    # },
+    # # PNK (12A)
+    # "340": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 20,
+    #         "min_val": 0,
+    #         "max_val": 6000,
+    #     }
+    # },
+    # # PNK (18A)
+    # "224": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 0,
+    #         "max_val": 30000,
+    #     }
+    # },
+    # "226": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 150,
+    #         "max_val": 1600,
+    #     }
+    # },
+    # "225": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 0.3,
+    #         "max_val": 3.5,
+    #     }
+    # },
+    # # PNK (20A)
+    # "212": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": 0,
+    #         "max_val": 2500,
+    #     }
+    # },
+    # # PNK (21A)
+    # "241": {
+    #     "pnk_21a_value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -90,
+    #         "max_val": 90,
+    #     }
+    # },
+    # "242": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -180,
+    #         "max_val": 180,
+    #     }
+    # },
+    # "272": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 0,
+    #         "max_val": 20000,
+    #     }
+    # },
+    # # PNK (25A)
+    # "370": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -10,
+    #         "max_val": 45,
+    #     }
+    # },
+    # "322": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 5,
+    #         "max_val": 40,
+    #     }
+    # },
+    # "323": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -10,
+    #         "max_val": 5,
+    #     }
+    # },
+    # "371": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": 0,
+    #         "max_val": 15,
+    #     }
+    # },
+    # "327": {
+    #     "value": {
+    #         "start_pos": 0,
+    #         "end_pos": 17,
+    #         "min_val": -4,
+    #         "max_val": 1.5,
+    #     }
+    # },
+    # "227": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 500,
+    #         "max_val": 1800,
+    #     }
+    # },
+    # "321": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 200,
+    #         "max_val": 500,
+    #     }
+    # },
+    # "373": {
+    #     "value": {
+    #         "start_pos": 2,
+    #         "end_pos": 17,
+    #         "min_val": 0.7,
+    #         "max_val": 3,
+    #     }
+    # },
 }

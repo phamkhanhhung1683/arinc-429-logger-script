@@ -1,3 +1,4 @@
+from datetime import datetime
 import socket
 import time
 from typing import Iterator
@@ -5,7 +6,7 @@ from typing import Iterator
 from scripts.schemas import RawMessage
 
 
-def extract_message(host: str, port: int) -> Iterator[RawMessage]:
+def extract_message_from_board(host: str, port: int) -> Iterator[RawMessage]:
     while True:
         buffer = ""
         try:
@@ -30,6 +31,9 @@ def extract_message(host: str, port: int) -> Iterator[RawMessage]:
 
                     for line in lines:
                         raw_message = decode_arinc_429_word(line)
+                        raw_message["timestamp"] = datetime.now().strftime(
+                            "%Y-%m-%d %H:%M:%S.%f"
+                        )[:-3]
                         if raw_message:
                             print(raw_message)
                             yield raw_message

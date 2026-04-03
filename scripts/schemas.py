@@ -2,8 +2,9 @@ from typing import TypedDict
 
 
 class RawMessage(TypedDict):
-    channel: int
+    timestamp: str
     string: str
+    channel: int
     binary: str
     parity: str
     data: str
