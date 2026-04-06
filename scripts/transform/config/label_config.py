@@ -245,93 +245,481 @@ MESSAGE_GROUPS = {
             "description": "Mã phiên bản phần mềm (năm - tháng - lĩnh vực - loại phần mềm - mã số PMO)",
         },
     },
-    # "Kh-31A (3B, 4B)": {
-    #     "157",
-    #     "141",
-    #     "154",
-    #     "156",
-    #     "152",
-    #     "150",
-    #     "151",
-    #     "155",
-    #     "201",
-    #     "153",
-    # },
-    # "PNK (5A)": {
-    #     "331",
-    #     "330",
-    #     "277",
-    #     "273",
-    # },
-    # "PNK (12A)": {
-    #     "340",
-    # },
-    # "PNK (20A)": {
-    #     "212",
-    #     "210",
-    #     "211",
-    #     "266",
-    #     "267",
-    #     "214",
-    #     "376",
-    # },
-    # "PNK (21A)": {
-    #     "000",
-    #     "204",
-    #     "272",
+    "Kh-31A (3B, 4B)": {
+        "157": {
+            "description": "Từ mã kiểm tra",
+        },
+        "141": {
+            "description": "Cự ly",
+            "fields": [
+                {
+                    "name": "cu_ly",
+                    "start_pos": 5,
+                    "end_pos": 16,
+                    "min_val": 0,
+                    "max_val": 120,
+                },
+            ],
+        },
+        "154": {
+            "description": "Tốc độ tiếp cận",
+            "fields": [
+                {
+                    "name": "toc_do_tiep_can",
+                    "start_pos": 6,
+                    "end_pos": 14,
+                    "min_val": 0,
+                    "max_val": 1.1,
+                },
+            ],
+        },
+        "156": {
+            "description": "Cự ly kích hoạt",
+            "fields": [
+                {
+                    "name": "cu_ly_kich_hoat",
+                    "start_pos": 6,
+                    "end_pos": 16,
+                    "min_val": -60,
+                    "max_val": -1,
+                },
+            ],
+        },
+        "150": {
+            "description": "Góc nghiêng",
+            "fields": [
+                {
+                    "name": "goc_nghieng",
+                    "start_pos": 9,
+                    "end_pos": 17,
+                    "min_val": -45,
+                    "max_val": 45,
+                },
+            ],
+        },
+        "151": {
+            "description": "Góc ngẩng",
+            "fields": [
+                {
+                    "name": "goc_ngang",
+                    "start_pos": 9,
+                    "end_pos": 17,
+                    "min_val": -45,
+                    "max_val": 45,
+                },
+            ],
+        },
+        "155": {
+            "description": "Lệnh đơn",
+        },
+        "201": {
+            "description": "Từ mã SUO",
+        },
+    },
+    "PNK (5A)": {
+        "331": {
+            "description": "Góc nghiêng tanga hiện tại - pitch",
+            "fields": [
+                {
+                    "name": "goc_nghieng_tanga_hien_tai",
+                    "start_pos": 0,
+                    "end_pos": 15,
+                    "min_val": -90,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "330": {
+            "description": "Góc nghiêng kren hiện tại - roll",
+            "fields": [
+                {
+                    "name": "goc_nghieng_kren_hien_tai",
+                    "start_pos": 0,
+                    "end_pos": 15,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "277": {
+            "description": "Khóa la bàn từ tính (con quay hồi chuyển)",
+            "fields": [
+                {
+                    "name": "khoa_la_ban_tu_tinh",
+                    "start_pos": 0,
+                    "end_pos": 10,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "273": {
+            "description": "Bản tin 10",
+            "fields": [
+                {
+                    "name": "ban_tin_10",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+    },
+    "PNK (12A)": {
+        "340": {
+            "description": "Chiều cao hình học",
+            "fields": [
+                {
+                    "name": "chieu_cao_hinh_hoc",
+                    "start_pos": 2,
+                    "end_pos": 20,
+                    "min_val": 0,
+                    "max_val": 6000,
+                },
+            ],
+        },
+    },
+    "PNK (18A)": {
+        "223": {
+            "description": "Độ cao tuyệt đối theo áp suất",
+            "fields": [
+                {
+                    "name": "do_cao_tuyet_doi_theo_ap_suat",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -500,
+                    "max_val": 30000,
+                },
+            ],
+        },
+        "224": {
+            "description": "Độ cao tương đối theo áp suất",
+            "fields": [
+                {
+                    "name": "do_cao_tuong_doi_theo_ap_suat",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 30000,
+                },
+            ],
+        },
+        "226": {
+            "description": "Vận tốc chỉ thị",
+            "fields": [
+                {
+                    "name": "van_toc_chi_thi",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 150,
+                    "max_val": 1600,
+                },
+            ],
+        },
+        "230": {
+            "description": "Vận tốc không khí thực",
+            "fields": [
+                {
+                    "name": "van_toc_khong_khi_thuc",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 150,
+                    "max_val": 3500,
+                },
+            ],
+        },
+        "225": {
+            "description": "Số mach hiện tại",
+            "fields": [
+                {
+                    "name": "so_mach_hien_tai",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0.3,
+                    "max_val": 3.5,
+                },
+            ],
+        },
+        "221": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 1000,
+                },
+            ],
+        },
+    },
+    "PNK (20A)": {
+        "211": {
+            "description": "Kinh độ",
+            "fields": [
+                {
+                    "name": "kinh_do",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "210": {
+            "description": "Vĩ độ",
+            "fields": [
+                {
+                    "name": "vi_do",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -90,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "266": {
+            "description": "Vận tốc thành phần",
+            "fields": [
+                {
+                    "name": "van_toc_thanh_phan",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -2500,
+                    "max_val": 2500,
+                },
+            ],
+        },
+        "212": {
+            "description": "Vận tốc hành trình",
+            "fields": [
+                {
+                    "name": "van_toc_hanh_trinh",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 2500,
+                },
+            ],
+        },
+        "376": {
+            "description": "Lệnh đơn",
+        },
+        "214": {
+            "description": "Hướng bay thực tế",
+            "fields": [
+                {
+                    "name": "huong_bay_thuc_te",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+    },
+    "PNK (21A)": {
+        "000": {
+            "description": "Dự phòng",
+        },
+        "240": {
+            "description": "Dấu hiệu",
+        },
+        "241": {
+            "description": "Vĩ độ",
+            "fields": [
+                {
+                    "name": "vi_do",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -90,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "242": {
+            "description": "Kinh độ",
+            "fields": [
+                {
+                    "name": "kinh_do",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "204": {
+            "description": "Hướng bay thực tế",
+            "fields": [
+                {
+                    "name": "huong_bay_thuc_te",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "272": {
+            "description": "Tầm bay còn lại theo nhiên liệu",
+            "fields": [
+                {
+                    "name": "tam_bay_con_lai_theo_nhien_lieu",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 20000,
+                },
+            ],
+        },
+    },
+    "PNK (25A)": {
+        "370": {
+            "description": "Góc tấn công",
+            "fields": [
+                {
+                    "name": "goc_tan_cong",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -10,
+                    "max_val": 45,
+                },
+            ],
+        },
+        "322": {
+            "description": "Góc tấn công tối đa cho phép",
+            "fields": [
+                {
+                    "name": "goc_tan_cong_toi_da_cho_phep",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 5,
+                    "max_val": 40,
+                },
+            ],
+        },
+        "323": {
+            "description": "Góc tấn công tối thiểu",
+            "fields": [
+                {
+                    "name": "goc_tan_cong_toi_thieu",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -10,
+                    "max_val": 5,
+                },
+            ],
+        },
+        "371": {},
+        "346": {
+            "description": "Bản tin 14",
+            "fields": [
+                {
+                    "name": "ban_tin_14",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -4,
+                    "max_val": 10,
+                },
+            ],
+        },
+        "333": {},
+        "326": {},
+        "327": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 0,
+                    "end_pos": 17,
+                    "min_val": -4,
+                    "max_val": 1.5,
+                },
+            ],
+        },
+        "227": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 500,
+                    "max_val": 1800,
+                },
+            ],
+        },
+        "321": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 200,
+                    "max_val": 500,
+                },
+            ],
+        },
+        "373": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0.7,
+                    "max_val": 3,
+                },
+            ],
+        },
+    },
+    "PNK (11B, 41A)": {
+        "332": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 0,
+                    "end_pos": 16,
+                    "min_val": -80,
+                    "max_val": 80,
+                },
+            ],
+        },
+        "346": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 0,
+                    "end_pos": 16,
+                    "min_val": -0.2,
+                    "max_val": 5,
+                },
+            ],
+        },
+        "376": {},
+        "214": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 0,
+                    "end_pos": 18,
+                    "min_val": -180,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "221": {},
+        "230": {},
+    },
+    # "SUO (9A)": {
     #     "241",
     #     "242",
-    #     "240",
-    # },
-    # "PNK (25A)": {
-    #     "370",
-    #     "322",
-    #     "323",
-    #     "371",
-    #     "333",
-    #     "326",
-    #     "327",
-    #     "321",
-    #     "373",
-    #     "346",
-    #     "227",
-    # },
-    # "PNK (18A)": {
-    #     "223",
-    #     "221",
-    #     "230",
-    #     "224",
-    #     "225",
-    #     "233",
-    #     "226",
-    # },
-    # "PNK (11B)": {
-    #     "221",
-    #     "230",
-    #     "214",
-    #     "376",
-    #     "346",
-    #     "332",
-    # },
-    # "PNK (41A)": {
-    #     "221",
-    #     "230",
-    #     "214",
-    #     "376",
-    #     "346",
-    #     "332",
-    # },
-    # "SUO (9A)": {
     #     "243",
     #     "244",
+    #     "245",
     #     "246",
     #     "247",
     #     "250",
     #     "251",
     #     "252",
-    #     "241",
-    #     "242",
-    #     "245",
     # },
     # "SUO (LS1)": {
     #     "215",
@@ -379,35 +767,3 @@ MESSAGE_GROUPS = {
     #     "352",
     # },
 }
-
-# LABEL_DESCRIPTIONS = {
-#     # A-737
-#     "317": "Từ nhận dạng",
-#     "210": "Vĩ độ",
-#     "211": "Kinh độ",
-#     "010": "Vĩ độ mở rộng / kinh độ mở rộng",
-#     "223": "Độ cao của anten vệ tinh so với mực nước biển (m)",
-#     "266": "Vận tốc theo hướng bắc (km/h)",
-#     "267": "Vận tốc theo phương đông (km/h)",
-#     "264": "Vận tốc theo hướng thẳng (km/h)",
-#     "324": "Thời gian ghi dữ liệu (giờ - phút - giây)",
-#     "127": "Sai lệch thời gian (us)",
-#     "320": "Sai số vị trí ước tính (m)",
-#     "126": "Thời gian (năm - tháng - ngày)",
-#     "031": "Loại vệ tinh (số hiệu vị trí - hệ số suy hao - số lượng vệ tinh)",
-#     "030": "Số lượng vệ tinh - tỷ số tín trên tạp - số kênh thu",
-#     "377": "Góc phương vị - góc ngẩng",
-#     "153": "Mã phiên bản phần mềm (năm - tháng - lĩnh vực - loại phần mềm - mã số PMO)",
-    # Kh-31A
-    # "157": "Từ mã kiểm tra",
-    # "141": "Cự ly",
-    # "154": "Tốc độ tiếp cận",
-    # "156": "Cự ly kích hoạt",
-    # "152": "Góc tà / góc tà theo đường chân trời",
-    # "150": "Góc nghiêng",
-    # "151": "Góc ngẩng",
-    # "155": "Lệnh đơn",
-    # "201": "Từ mã SUO",
-    # A-737 / Kh-31A
-    # "153": "Mã phiên bản phần mềm (năm - tháng - lĩnh vực - loại phần mềm - mã số PMO) (A-737) / góc phương vị (Kh-31A) / cự ly bổ nhào (Kh-31A)",
-# }
