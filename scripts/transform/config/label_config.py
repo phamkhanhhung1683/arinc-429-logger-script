@@ -709,41 +709,243 @@ MESSAGE_GROUPS = {
         "221": {},
         "230": {},
     },
-    # "SUO (9A)": {
-    #     "241",
-    #     "242",
-    #     "243",
-    #     "244",
-    #     "245",
-    #     "246",
-    #     "247",
-    #     "250",
-    #     "251",
-    #     "252",
-    # },
-    # "SUO (LS1)": {
-    #     "215",
-    #     "216",
-    #     "217",
-    #     "220",
-    #     "222",
-    #     "231",
-    #     "232",
-    #     "223",
-    #     "210",
-    #     "211",
-    #     "221",
-    #     "230",
-    #     "214",
-    #     "224",
-    #     "225",
-    #     "233",
-    #     "226",
-    #     "242",
-    #     "240",
-    #     "227",
-    #     "245",
-    # },
+    "SUO (9A)": {
+        "241": {},
+        "242": {},
+        "243": {},
+        "244": {},
+        "245": {},
+        "246": {},
+        "247": {},
+        "250": {},
+        "251": {},
+        "252": {},
+    },
+    "SUO (LS1)": {
+        "211": {
+            "description": "Vĩ độ địa lý",
+            "fields": [
+                {
+                    "name": "vi_do_dia_ly",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "210": {
+            "description": "Kinh độ địa lý",
+            "fields": [
+                {
+                    "name": "kinh_do_dia_ly",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "245": {
+            "description": "Vĩ độ",
+            "fields": [
+                {
+                    "name": "vi_do",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "242": {
+            "description": "Kinh độ",
+            "fields": [
+                {
+                    "name": "kinh_do",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "240": {
+            "description": "Hướng bay định trước",
+            "fields": [
+                {
+                    "name": "huong_bay_dinh_truoc",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "214": {
+            "description": "Hướng bay thực tế",
+            "fields": [
+                {
+                    "name": "huong_bay_thuc_te",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "215": {
+            "description": "Chỉ thị mục tiêu theo góc phương vị",
+            "fields": [
+                {
+                    "name": "chi_thi_muc_tieu_theo_goc_phuong_vi",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "216": {
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "217": {
+            "description": "Bản tin số 10",
+        },
+        "220": {
+            "description": "Bản tin số 11",
+        },
+        "221": {
+            "description": "Vận tốc Wn",
+            "fields": [
+                {
+                    "name": "van_toc_wn",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 3500,
+                },
+            ],
+        },
+        "222": {
+            "description": "Vận tốc We",
+            "fields": [
+                {
+                    "name": "van_toc_we",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 3500,
+                },
+            ],
+        },
+        "223": {
+            "description": "Mức độ bẻ cần điều khiển",
+            "fields": [
+                {
+                    "name": "ux",
+                    "start_pos": 2,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 5,
+                },
+                {
+                    "name": "uy",
+                    "start_pos": 13,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 5,
+                },
+            ],
+        },
+        "224": {
+            "description": "Hướng bay thực tế",
+            "fields": [
+                {
+                    "name": "huong_bay_thuc_te",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "225": {
+            "description": "Bản tin số 16",
+        },
+        "226": {
+            "description": "Bản tin số 17",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "227": {
+            "description": "Bản tin số 18",
+        },
+        "230": {
+            "description": "Bản tin số 19",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 40,
+                },
+            ],
+        },
+        "231": {
+            "description": "Thành phần vận tốc theo trục X",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_x",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 3500,
+                },
+            ],
+        },
+        "232": {
+            "description": "Thành phần vận tốc theo trục Y",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_y",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 3500,
+                },
+            ],
+        },
+        "233": {
+            "description": "Thành phần vận tốc theo trục Z",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_z",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 3500,
+                },
+            ],
+        },
+
+    },
     # "SUO (LS3)": {
     #     "320",
     #     "323",
