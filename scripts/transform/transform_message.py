@@ -8,7 +8,9 @@ from scripts.transform.process_label import (
 from scripts.schemas import RawMessage, ProcessedMessage
 
 
-def transform_message(raw_message: RawMessage) -> ProcessedMessage | None:
+def transform_message(
+    raw_message: RawMessage, selected_message_group: str | None
+) -> ProcessedMessage | None:
     if not raw_message:
         return None
 
@@ -16,11 +18,15 @@ def transform_message(raw_message: RawMessage) -> ProcessedMessage | None:
 
     processed_label = get_processed_label(raw_message["label"])
 
-    message_group = get_message_group(processed_label)
+    message_group = None
+    message_description = None
+    processed_data = None
 
-    message_description = get_message_description(processed_label)
-
-    processed_data = get_processed_data(processed_label, raw_message["data"])
+    if processed_label and selected_message_group:
+        message_group = get_message_group(selected_message_group, processed_label)
+        if message_group:
+            message_description = get_message_description(message_group, processed_label)
+            processed_data = get_processed_data(message_group, processed_label, raw_message["data"])
 
     return {
         "raw_message": raw_message,

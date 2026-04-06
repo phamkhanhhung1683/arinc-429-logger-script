@@ -1,29 +1,29 @@
 from decimal import Decimal, getcontext
 import json
 
-from scripts.transform.data_config import DATA_CONFIGS
+from scripts.transform.config.label_config import MESSAGE_GROUPS
 
 getcontext().prec = 40
 
 
-def get_processed_data(label: str, raw_data: str) -> str | None:
-    configs = DATA_CONFIGS.get(label)
-    if not configs:
+def get_processed_data(message_group: str, label: str, raw_data: str) -> str | None:
+    configs = MESSAGE_GROUPS[message_group][label].get("fields")
+    if configs is None:
         return None
 
     result: dict[str, str] = {}
 
-    for name, cfg in DATA_CONFIGS[label].items():
+    for config in configs:
         value = compute_data(
             raw_data,
-            cfg["start_pos"],
-            cfg["end_pos"],
-            cfg["min_val"],
-            cfg["max_val"],
+            config["start_pos"],
+            config["end_pos"],
+            config["min_val"],
+            config["max_val"],
         )
 
         if value is not None:
-            result[name] = value
+            result[config["name"]] = value
 
     if not result:
         return None
