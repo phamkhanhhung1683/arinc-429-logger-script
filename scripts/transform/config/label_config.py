@@ -944,28 +944,408 @@ MESSAGE_GROUPS = {
                 },
             ],
         },
-
     },
-    # "SUO (LS3)": {
-    #     "320",
-    #     "323",
-    #     "324",
-    #     "325",
-    #     "326",
-    #     "327",
-    #     "330",
-    #     "331",
-    #     "332",
-    #     "340",
-    #     "341",
-    #     "342",
-    #     "343",
-    #     "344",
-    #     "345",
-    #     "346",
-    #     "347",
-    #     "350",
-    #     "351",
-    #     "352",
-    # },
+    "SUO (LS3)": {
+        "320": {
+            "description": "Xác nhận lệnh MFK",
+        },
+        "323": {
+            "description": "Góc phương vị",
+            "fields": [
+                {
+                    "name": "goc_phuong_vi",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "324": {
+            "description": "Góc phương vị theo hướng bắc",
+            "fields": [
+                {
+                    "name": "goc_phuong_vi_theo_huong_bac",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "325": {
+            "description": "Khoảng cách",
+            "fields": [
+                {
+                    "name": "khoang_cach",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+            ],
+        },
+        "326": {
+            "description": "Tốc độ tiếp cận",
+        },
+        "327": {
+            "description": "Thành phần vận tốc theo trục X",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_x",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 2000,
+                },
+            ],
+        },
+        "330": {
+            "description": "Thành phần vận tốc theo trục Y",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_y",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 2000,
+                },
+            ],
+        },
+        "331": {
+            "description": "Thành phần vận tốc theo trục Z",
+            "fields": [
+                {
+                    "name": "thanh_phan_van_toc_theo_truc_z",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 2000,
+                },
+            ],
+        },
+        "332": {
+            "description": "Bản tin 9",
+        },
+        "340": {
+            "description": "Bản tin 10",
+        },
+        "341": {
+            "description": "Cự ly bản đồ số",
+            "fields": [
+                {
+                    "name": "d_max",
+                    "start_pos": 4,
+                    "end_pos": 13,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+                {
+                    "name": "d_min",
+                    "start_pos": 14,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+            ],
+        },
+        "342": {
+            "description": "Bản tin 12",
+        },
+        "343": {
+            "description": "Số hóa thang đo góc phương vị",
+            "fields": [
+                {
+                    "name": "gioi_han_trai",
+                    "start_pos": 5,
+                    "end_pos": 13,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+                {
+                    "name": "gioi_han_phai",
+                    "start_pos": 15,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "344": {
+            "description": "Vị trí máy bay trên bản đồ",
+            "fields": [
+                {
+                    "name": "x",
+                    "start_pos": 13,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 320,
+                },
+                {
+                    "name": "y",
+                    "start_pos": 2,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 240,
+                },
+            ],
+        },
+        "345": {
+            "description": "Bản tin 15",
+            "fields": [
+                {
+                    "name": "goc_dinh_huong_may_bay_tren_ban_do",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "346": {
+            "description": "Bản tin 16",
+            "fields": [
+                {
+                    "name": "vi_tri_diem_dau_anten",
+                    "start_pos": 2,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 60,
+                },
+                {
+                    "name": "vi_tri_diem_dau_anten",
+                    "start_pos": 13,
+                    "end_pos": 22,
+                    "min_val": 0,
+                    "max_val": 240,
+                },
+            ],
+        },
+        "347": {
+            "description": "Bản tin 17",
+        },
+        "350": {
+            "description": "Bản tin 18",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 333.5,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 17,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 63,
+                },
+            ],
+        },
+        "351": {
+            "description": "Bản tin 19",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 3,
+                    "end_pos": 13,
+                    "min_val": 0,
+                    "max_val": 150,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 13,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 110,
+                },
+            ],
+        },
+        "352": {
+            "description": "Bản tin 20",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 3,
+                    "end_pos": 13,
+                    "min_val": 0,
+                    "max_val": 110,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 13,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 110,
+                },
+            ],
+        },
+        "353": {
+            "description": "Bản tin 21",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 17,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "354": {
+            "description": "Bản tin 22",
+            "fields": [
+                {
+                    "name": "r_max",
+                    "start_pos": 1,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+                {
+                    "name": "r_min",
+                    "start_pos": 12,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+            ],
+        },
+        "355": {
+            "description": "Bản tin 23",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 2,
+                    "end_pos": 10,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 10,
+                    "end_pos": 21,
+                    "min_val": 0,
+                    "max_val": 400,
+                },
+            ],
+        },
+        "356": {
+            "description": "Bản tin 24",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 70,
+                },
+            ],
+        },
+        "357": {
+            "description": "Bản tin 25",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 2,
+                    "end_pos": 12,
+                    "min_val": 0,
+                    "max_val": 1152,
+                },
+            ],
+        },
+        "360": {
+            "description": "Bản tin 26",
+        },
+        "361": {
+            "description": "Bản tin 27",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 2,
+                    "end_pos": 9,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 13,
+                    "end_pos": 20,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "362": {
+            "description": "Bản tin 28",
+            "fields": [
+                {
+                    "name": "data_1",
+                    "start_pos": 10,
+                    "end_pos": 16,
+                    "min_val": 0,
+                    "max_val": 45,
+                },
+                {
+                    "name": "data_2",
+                    "start_pos": 17,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 45,
+                },
+            ],
+        },
+        "310": {
+            "description": "Vĩ độ tâm bản đồ rada",
+            "fields": [
+                {
+                    "name": "vi_do_tam_ban_do_rada",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "311": {
+            "description": "Kinh độ tâm bản đồ rada",
+            "fields": [
+                {
+                    "name": "kinh_do_tam_ban_do_rada",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 180,
+                },
+            ],
+        },
+        "312": {
+            "description": "Bản tin 31",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 90,
+                },
+            ],
+        },
+        "313": {
+            "description": "Bản tin 32",
+            "fields": [
+                {
+                    "name": "?",
+                    "start_pos": 2,
+                    "end_pos": 23,
+                    "min_val": 0,
+                    "max_val": 800,
+                },
+            ],
+        },
+        "314": {
+            "description": "Bản tin 33",
+        },
+    },
 }
